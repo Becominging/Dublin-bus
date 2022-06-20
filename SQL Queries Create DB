@@ -19,3 +19,51 @@ alter TABLE RT_Leavetimes
 , add column note VARCHAR(255)
 
 ;
+
+alter TABLE Vehicle 
+ add column datasource VARCHAR(4)
+, add column dayofservice DATETIME
+, add column vehicleid VARCHAR(6)
+, add column distance INTEGER
+, add column minutes INTEGER
+, add column lastupdate DATETIME
+, add column note VARCHAR(255) 
+;
+
+alter TABLE RT_Trips 
+ add column datasource VARCHAR(4)
+, add column dayofservice DATETIME
+, add column tripid VARCHAR(30)
+, add column lineid VARCHAR(10)
+, add column routeid VARCHAR(20)
+, add column direction VARCHAR(2)
+, add column plannedtime_dep INTEGER
+, add column plannedtime_ar INTEGER
+, add column basin VARCHAR(20)
+, add column tenderlot VARCHAR(30)
+, add column actualtime_dep INTEGER
+, add column actualtime_arr INTEGER
+, add column suppressed INTEGER
+, add column justificationid INTEGER
+, add column lastupdate DATETIME
+, add column note VARCHAR(255)
+;
+
+alter TABLE RT_RawData 
+ add column datasource VARCHAR(4)
+, add column dayofservice DATETIME
+, add column vehicleid VARCHAR(6)
+, add column timepos DATETIME
+, add column PosX INTEGER
+, add column PosY INTEGER
+, add column Odometer INTEGER
+, add column tripid VARCHAR(30)
+, add column TripOdometer INTEGER
+, add column passengersin INTEGER
+, add column passengersout INTEGER
+;
+
+alter TABLE RT_Justifications
+ add column datasource VARCHAR(4)
+, add column justificationid INTEGER
+;
