@@ -31,7 +31,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 
 const sidebarNavigation = [
   { name: 'Planner', href: '#', icon: MapIcon, current: false },
-  { name: 'Rountes', href: '#', icon: MapIcon, current: false },
+  { name: 'Rountes', href: '#', icon: SwitchVerticalIcon, current: false },
   { name: 'Weather', href: '#', icon: CloudIcon, current: true },
   { name: 'Favorites', href: '#', icon: HeartIcon, current: false },
   { name: 'Message', href: '#', icon: BellIcon, current: false },
@@ -46,7 +46,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example2() {
+export default function SidebarLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
