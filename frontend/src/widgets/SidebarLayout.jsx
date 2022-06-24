@@ -1,7 +1,7 @@
 /*
-  This example requires Tailwind CSS v2.0+ 
+  This layout requires Tailwind CSS v2.0+ 
   
-  This example requires some changes to your config:
+  This layout requires some changes to your config:
   
   ```
   // tailwind.config.js
@@ -22,7 +22,6 @@ import {
   SwitchVerticalIcon,
   MenuAlt2Icon,
   CloudIcon,
-  PlusSmIcon,
   HeartIcon,
   MapIcon,
   XIcon,
@@ -52,7 +51,7 @@ export default function SidebarLayout() {
   return (
     <>
       {/*
-        This example requires updating your template:
+        This function requires updating your template:
 
         ```
         <html class="h-full bg-gray-50">
