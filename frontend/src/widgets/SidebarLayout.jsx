@@ -14,7 +14,9 @@
   }
   ```
 */
-import { Fragment, useState } from 'react'
+
+
+import { Fragment, useState, Popover} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   AnnotationIcon,
@@ -27,6 +29,8 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
+import SelectRoute from './SelectRoute'
+
 
 const sidebarNavigation = [
   { name: 'Planner', href: '#', icon: MapIcon, current: false },
@@ -69,9 +73,9 @@ export default function SidebarLayout() {
                 alt="Transport for Ireland"
               />
             </div>
-            <div className="flex-1 mt-6 w-full px-2 space-y-1">
+            <Menu as="div" className="flex-1 mt-6 w-full px-2 space-y-1">
               {sidebarNavigation.map((item) => (
-                <a
+                <Menu.Button
                   key={item.name}
                   href={item.href}
                   className={classNames(
@@ -85,12 +89,30 @@ export default function SidebarLayout() {
                       item.current ? 'text-white' : 'text-white group-hover:text-indigo-300',
                       'h-6 w-6'
                     )}
-                    aria-hidden="true"
-                  />
+                    aria-hidden="true" />
                   <span className="mt-2">{item.name}</span>
-                </a>
+                </Menu.Button>
               ))}
-            </div>
+
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-1"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 translate-y-1"
+                >
+                  <Menu.Items className="origin-top-left absolute left-200 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                    <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                      <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                      <SelectRoute />
+                   
+                     </div>
+                  </div>
+                  </Menu.Items>
+                </Transition>
+            </Menu>
           </div>
         </div>
 
@@ -183,7 +205,7 @@ export default function SidebarLayout() {
           </Dialog>
         </Transition.Root>
 
-        {/* Content area */}
+        {/* Header area */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <header className="w-full">
             <div className="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
@@ -277,6 +299,7 @@ export default function SidebarLayout() {
                 <h1 id="primary-heading" className="sr-only">
                   Photos
                 </h1>
+                
                 {/* Your content */}
               </section>
             </main>
