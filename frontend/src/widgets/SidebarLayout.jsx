@@ -30,6 +30,9 @@ import {
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import SelectRoute from './SelectRoute'
+import SelectStop from './SelectStop'
+import Calendar from './Calendar'
+
 
 
 const sidebarNavigation = [
@@ -293,22 +296,25 @@ export default function SidebarLayout() {
 
           {/* Main content */}
           <div className="flex-1 flex items-stretch overflow-hidden">
-            <main className="flex-1 overflow-y-auto">
+            <main className="overflow-y-auto w-96">
               {/* Primary column */}
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
                 <h1 id="primary-heading" className="sr-only">
                   Photos
                 </h1>
-                
+                <SelectRoute />
+                <SelectStop />
+                <Calendar />
                 {/* Your content */}
               </section>
             </main>
 
             {/* Secondary column (hidden on smaller screens) */}
-            {/* <aside className="hidden w-96 bg-white border-l border-gray-200 overflow-y-auto lg:block"> */}
+            <aside className="hidden w-96 bg-white border-l border-gray-200 overflow-y-auto lg:block">
               {/* Your content */}
-            {/* </aside> */}
+            </aside>
           </div>
+
         </div>
       </div>
     </>
