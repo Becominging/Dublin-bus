@@ -9,10 +9,17 @@ class StopModelSerializer(serializers.ModelSerializer):
         model = Stop
         fields = '__all__'
 
-# class ShapeModelSerializer(serializers.ModelSerializer):
+class ShapeModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Shape
+        fields = '__all__'
+
+
+# class StopInTripModelSerializer(serializers.ModelSerializer):
 #
 #     class Meta:
-#         model = Shape
+#         model = StopTime
 #         fields = '__all__'
 
 # class ShapeSerializer(serializers.Serializer):

@@ -68,8 +68,6 @@ class StopTime(models.Model):
     stop = models.ForeignKey(Stop, on_delete=models.CASCADE)
     stop_sequence = models.IntegerField()
     stop_headsign = models.CharField(max_length=100)
-    pickup_type = models.IntegerField()
-    drop_off_type = models.IntegerField()
     shape_dist_traveled = models.FloatField()
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
 

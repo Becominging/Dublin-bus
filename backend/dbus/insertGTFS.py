@@ -197,9 +197,7 @@ with open('gtfs/stop_times.txt') as stop_times_file:
                 departure_time=departure_time,
                 stop_sequence=int(row[4]),
                 stop_headsign=row[5],
-                pickup_type=int(row[6]),
-                drop_off_type=int(row[7]),
-                shape_dist_traveled=float(row[8]),
+                shape_dist_traveled=float(row[6]),
                 trip=Trip.objects.get(trip_id=row[0]),
                 stop=Stop.objects.get(stop_id=row[3])
             )
