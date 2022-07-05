@@ -89,69 +89,9 @@ def StopInfo(request, stop_id):
 
 
 
-# def lines(request):
-#     """
-#     Get all of the lines in both directions for the bus network
-#     """
-#
-#     # Get valid service IDs (current date is greater than start_date and less than end date
-#     day = datetime.today().strftime("%A").lower()
-#     service_ids = list(Calendar.objects.filter(**{day: True}).filter(start_date__lte=datetime.today(), end_date__gte=datetime.today()).values_list('service_id', flat=True))
-#
-#     result = Trip.objects.filter(calendar_id__in=service_ids).values("route_id", "direction_id", "trip_headsign","route__route_short_name").distinct()
-#
-#     for i, record in enumerate(result):
-#         # make list of all possible trip_ids for this route & direction
-#         trid_ids = \
-#             Trip.objects.filter(route_id=record['route_id'],
-#                             direction_id=record['direction_id'],
-#                             trip_headsign=record['trip_headsign'],
-#                             route__route_short_name=record['route__route_short_name']
-#                             ).values_list("trip_id", flat=True)
-#
-#         # append the upcoming or most recently past trip_id for this route & direction
-#         trip_id = \
-#             StopTime.objects.order_by("departure_time")\
-#                             .filter(trip_id__in=trid_ids,
-#                                     shape_dist_traveled="0.00",
-#                                     departure_time__gte=datetime.now())\
-#                             .values_list("trip_id",flat=True)
-#
-#         # if there are no more services for this trip today
-#         if not trip_id:
-#             # then append the most recent past trip
-#             result[i]['trip_id'] = \
-#                 StopTime.objects.order_by("-departure_time")\
-#                                 .filter(trip_id__in=trid_ids,
-#                                         shape_dist_traveled="0.00")\
-#                                 .values_list("trip_id", flat=True)[0]
-#         else:
-#             # otherwise append the most recent future trip
-#             result[i]['trip_id'] = trip_id[0]
-#
-#         # append stops list per route & direction
-#         result[i]['stops'] = list(
-#             StopTime.objects.filter(trip_id=record['trip_id']
-#                                     ).values("arrival_time",
-#                                              "departure_time",
-#                                              "stop_sequence",
-#                                              "stop_headsign",
-#                                              "shape_dist_traveled",
-#                                              "stop_id",
-#                                              stop_name=F("stop__stop_name"),
-#                                              stop_number=F("stop__stop_number"),
-#                                              stop_lat=F("stop__stop_lat"),
-#                                              stop_lon=F("stop__stop_lon")
-#                                              )
-#                                     )
-#
-#     return JsonResponse(list(result), safe=False)
-
-
-
 def StopsInTrip(request, trip_id):
     """
-    Return the stops in a trip in order of stop sequence.
+    Return the stops in a particular trip in order of stop sequence.
     """
 
     try:
@@ -165,7 +105,7 @@ def StopsInTrip(request, trip_id):
 
 def ShapeOfTrip(request, trip_id):
     """
-    Return the shape of a trip in order of point sequence.
+    Return the shape of a particular trip in order of point sequence.
     """
 
     try:
@@ -185,7 +125,7 @@ def ShapeOfTrip(request, trip_id):
 
 def TripsInRoute(request, route_id):
     """
-    Return all of the trips for a selected route.
+    Return all of the trips for a particular route.
     """
 
     route_details = Route.objects.get(route_id=route_id)
@@ -214,3 +154,33 @@ def TripsInRoute(request, route_id):
     }
 
     return JsonResponse(response)
+
+
+
+def Lines(request):
+    """
+    Return all the lines(the upcoming or most recently past trip for a route & direction)
+    """
+
+    # Get valid service IDs (current date is greater than start_date and less than end date)
+    day = datetime.today().strftime("%A").lower()
+    service_ids = list(Calendar.objects.filter(**{day: True}).filter(start_date__lte=datetime.today(), end_date__gte=datetime.today()).values_list('service_id', flat=True))
+    # Get all the lines
+    result = Trip.objects.filter(calendar_id__in=service_ids).values("route_id", "direction_id", "trip_headsign","route__route_short_name").distinct()
+
+    for i, record in enumerate(result):
+        # Make list of all possible trip_ids for this line
+        trid_ids = Trip.objects.filter(route_id=record['route_id'], direction_id=record['direction_id'], trip_headsign=record['trip_headsign'], route__route_short_name=record['route__route_short_name']).values_list("trip_id", flat=True)
+        # Append the upcoming or most recently past trip_id for this line
+        trip_id = StopTime.objects.order_by("departure_time").filter(trip_id__in=trid_ids,shape_dist_traveled="0.00",departure_time__gte=datetime.now()).values_list("trip_id",flat=True)
+        if not trip_id:
+            # If there are no more services for this trip today then add most recent past trip
+            result[i]['trip_id'] = StopTime.objects.order_by("-departure_time").filter(trip_id__in=trid_ids,shape_dist_traveled="0.00").values_list("trip_id", flat=True)[0]
+        else:
+            # Add the most recent future trip
+            result[i]['trip_id'] = trip_id[0]
+
+        # Add stop list in every line
+        result[i]['stops'] = list(StopTime.objects.filter(trip_id=record['trip_id']).values("arrival_time","departure_time","stop_sequence","stop_headsign","shape_dist_traveled","stop_id",stop_name=F("stop__stop_name"),stop_number=F("stop__stop_number"),stop_lat=F("stop__stop_lat"),stop_lon=F("stop__stop_lon")))
+
+    return JsonResponse(list(result), safe=False)
