@@ -32,17 +32,21 @@ import { SearchIcon } from '@heroicons/react/solid'
 import SelectRoute from './SelectRoute'
 import SelectStop from './SelectStop'
 import Calendar from './Calendar'
+import Map from './Map'
+import Inputstop from './Inputstop'
 
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', icon: MapIcon, current: false },
+  { name: 'Planner', href: '#', icon: MapIcon, current: true },
   { name: 'Rountes', href: '#', icon: SwitchVerticalIcon, current: false },
-  { name: 'Weather', href: '#', icon: CloudIcon, current: true },
+  { name: 'Stops', href: '#', icon: SearchIcon, current: false },
+  // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
   { name: 'Favorites', href: '#', icon: HeartIcon, current: false },
-  { name: 'Message', href: '#', icon: BellIcon, current: false },
+  { name: 'Alert', href: '#', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#', icon: AnnotationIcon, current: false },
 ]
+
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Sign out', href: '#' },
@@ -221,8 +225,8 @@ export default function SidebarLayout() {
                 <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
               </button>
               <div className="flex-1 flex justify-between px-4 sm:px-6">
-                <div className="flex-1 flex">
-                  <form className="w-full flex md:ml-0" action="#" method="GET">
+               <div className="flex-1 flex">
+                  {/* <form className="w-full flex md:ml-0" action="#" method="GET">
                     <label htmlFor="search-field" className="sr-only">
                       Search all files
                     </label>
@@ -238,7 +242,7 @@ export default function SidebarLayout() {
                         type="search"
                       />
                     </div>
-                  </form>
+                  </form> */}
                 </div>
                 <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                   {/* Profile dropdown */}
@@ -295,7 +299,7 @@ export default function SidebarLayout() {
           </header>
 
           {/* Main content */}
-          <div className="flex-1 flex items-stretch overflow-hidden">
+          <div className="flex items-stretch overflow-hidden">
             <main className="overflow-y-auto w-96">
               {/* Primary column */}
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
@@ -305,18 +309,23 @@ export default function SidebarLayout() {
                 <SelectRoute />
                 <SelectStop />
                 <Calendar />
-                {/* Your content */}
-              </section>
+                {/* <Inputstop /> */}    
+              </section>  
             </main>
 
             {/* Secondary column (hidden on smaller screens) */}
-            <aside className="hidden w-96 bg-white border-l border-gray-200 overflow-y-auto lg:block">
+            <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
               {/* Your content */}
+              <div className="flex w-full items-stretch overflow-hidden">
+                <Map />
+              </div>
             </aside>
           </div>
 
         </div>
+        
       </div>
+      
     </>
   )
 }
