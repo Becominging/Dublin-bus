@@ -307,13 +307,15 @@ export default function SidebarLayout() {
                 <h1 id="primary-heading" className="sr-only">
                   Photos
                 </h1>
-                {/* < TestuseFetch /> */}
-                <ComboboxLines />
-                {/* <SelectRoute /> */}
-                {/* <SelectStop />
-                <Calendar /> */}
+                <SelectRoute />
+                {/* <SelectStop /> */}
+                {/* <Calendar /> */}
                 {/* <Inputstop /> */}
+
+                < TestuseFetch />
+                
                 {/* <PlannerContainer />     */}
+                {/* <ComboboxLines /> */}
               </section>  
             </main>
 
