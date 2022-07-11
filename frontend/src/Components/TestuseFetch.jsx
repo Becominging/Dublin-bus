@@ -1,7 +1,4 @@
 import useFetch from "../useFetch.js";
-import { Listbox, Transition } from '@headlessui/react'
-import { Combobox } from '@headlessui/react'
-
 
 export default function TestuseFetch() {
   const { data: lines, loading, error } = useFetch("http://127.0.0.1:8000/lines/")
@@ -15,10 +12,6 @@ export default function TestuseFetch() {
       { lines && <p>{lines.map((line) => (
             line['trip_headsign']  
         ))}</p> }
-
-      { lines && <Listbox>{lines.map((line) => (
-            line['trip_headsign']  
-        ))}</Listbox> }  
       
     </div>
     

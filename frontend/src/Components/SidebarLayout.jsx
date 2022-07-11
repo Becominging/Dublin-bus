@@ -36,6 +36,7 @@ import Map from './Map'
 import Inputstop from './Inputstop'
 import TestuseFetch from './TestuseFetch'
 import ComboboxLines from './ComboboxLines'
+import PlannerContainer from './PlannerContainer'
 
 
 const sidebarNavigation = [
@@ -307,14 +308,14 @@ export default function SidebarLayout() {
                 <h1 id="primary-heading" className="sr-only">
                   Photos
                 </h1>
-                <SelectRoute />
+                {/* <SelectRoute /> */}
                 {/* <SelectStop /> */}
                 {/* <Calendar /> */}
                 {/* <Inputstop /> */}
 
-                < TestuseFetch />
+                {/* < TestuseFetch /> */}
                 
-                {/* <PlannerContainer />     */}
+                <PlannerContainer />    
                 {/* <ComboboxLines /> */}
               </section>  
             </main>

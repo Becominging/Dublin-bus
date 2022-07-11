@@ -23,7 +23,7 @@ function classNames(...classes) {
 export default function SelectRoute() {
   
   const { data: routes, loading, error } = useFetch("http://127.0.0.1:8000/lines/")
-  const [selected, setSelected] = useState()
+  const [selected, setSelected] = useState('')
   return (
     routes && <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (

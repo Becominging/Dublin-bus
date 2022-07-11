@@ -15,11 +15,7 @@ export default function useFetch(url) {
       .then(res => {
           setLoading(false);
           console.log("What we have fetched:",res)
-
-          //checking for multiple responses for more flexibility 
-          //with the url we send in.
           setData(res.data);
-        //   res.content && setData(res.content);
       })
       .catch(err => {
           setLoading(false)
