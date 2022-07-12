@@ -2,6 +2,7 @@ import { useEffect, Fragment, useState} from "react";
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import { SwitchHorizontalIcon } from '@heroicons/react/solid'
 import SelectStops from './SelectStops'
+import ComboboxStops from './ComboboxStops'
 import PickTime from './PickTime'
 
 // This is a subcomponent from the planner search system.
@@ -66,8 +67,8 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
   return (
     <>
         {/* Display information of seleced line  */}
-        <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
-            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+        <div className="w-full flex flex-col items-center space-y- sm:items-end p-2">
+            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-auto">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
@@ -94,18 +95,33 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
         </div>
 
         {/* Select origin stop and destination stop */}
-        <div>
-            <div>
-                <SelectStops stops={validOriginStops} selected={origin} setSelected={setOrigin} />
+        <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+          <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="p-2">
+              <div className="flex-shrink-0">
+                {/* <SelectStops stops={validOriginStops} selected={origin} setSelected={setOrigin} /> */}
+                <ComboboxStops stops={validOriginStops} selected={origin} setSelected={setOrigin} label={"Select your origin stop:"}/> 
+                <div className='pt-4'>
+                  {/* <SelectStops stops={validDestinationStops} selected={destination} setSelected={setDestination} /> */}
+                  <ComboboxStops stops={validDestinationStops} selected={destination} setSelected={setDestination} label={"Select your destination stop:"}/>      
+                </div>
+              </div>
             </div>
-            <div>
-                <SelectStops stops={validDestinationStops} selected={destination} setSelected={setDestination} />
-            </div>
+          </div>
         </div>
+        
 
         {/* Select the departure time  */}
-        <div>
-            <PickTime setSelectedTime={setSelectedTime} />
+        <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+          <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="p-2">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <PickTime setSelectedTime={setSelectedTime} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
             
     </>
