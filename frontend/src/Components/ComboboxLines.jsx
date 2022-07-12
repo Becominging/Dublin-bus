@@ -28,9 +28,9 @@ const ComboboxLines = ({ lines, setSelectedLine }) => {
     lines && 
       <Combobox as="div" onChange={(line) => handleSubmit(line)}>
         {/* <Combobox.Label className="block text-sm font-medium text-gray-700">Select a line</Combobox.Label> */}
-        <div className="relative mt-1">
+        <div className="relative mt-1 p-2">
           <Combobox.Input
-            className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-green-400 sm:text-sm"
+            className="w-full font-light rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-green-400 sm:text-sm"
             placeholder={"Search for a line"}
             onChange={(event) => setQuery(event.target.value)}
             displayValue={(line) => line && line['route__route_short_name']} />
@@ -39,7 +39,7 @@ const ComboboxLines = ({ lines, setSelectedLine }) => {
           </Combobox.Button>
 
           {filteredLines.length > 0 && (
-            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Combobox.Options className="absolute font-light z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {filteredLines.map((line) => (
                 <Combobox.Option
                   key={line['trip_id']}
