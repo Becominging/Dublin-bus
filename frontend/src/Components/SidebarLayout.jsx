@@ -1,21 +1,3 @@
-/*
-  This layout requires Tailwind CSS v2.0+ 
-  
-  This layout requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
-
 import { Fragment, useState, Popover} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
@@ -29,9 +11,6 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import SelectRoute from './SelectRoute'
-import SelectStop from './SelectStop'
-import Calendar from './Calendar'
 import Map from './Map'
 import Inputstop from './Inputstop'
 import TestuseFetch from './TestuseFetch'
@@ -115,7 +94,7 @@ export default function SidebarLayout() {
                   <Menu.Items className="origin-top-left absolute left-200 mt-3 px-2 w-screen max-w-xs sm:px-0">
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                       <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                      <SelectRoute />
+                      {/* <SelectRoute /> */}
                    
                      </div>
                   </div>

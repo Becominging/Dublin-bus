@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import useFetch from "../useFetch.js";
-import SelectStop from './SelectStop'
 import ComboboxLines from './ComboboxLines'
 import MainPlanner from './MainPlanner'
 
