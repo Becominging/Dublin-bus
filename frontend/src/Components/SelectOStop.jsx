@@ -2,25 +2,25 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-const routes = [
-  { id: 1, name: 'UCD' },
-  { id: 2, name: 'TCD' },
-  { id: 3, name: 'Temple Bar' },
-  { id: 4, name: '155' },
-  { id: 5, name: '17' },
-  { id: 6, name: '175' },
-  { id: 7, name: '4' },
-  { id: 8, name: '7' },
-  { id: 9, name: '700' },
-  { id: 10, name: '86A' },
-]
+// const stops = [
+//   { id: 1, name: 'UCD' },
+//   { id: 2, name: 'TCD' },
+//   { id: 3, name: 'Temple Bar' },
+//   { id: 4, name: '155' },
+//   { id: 5, name: '17' },
+//   { id: 6, name: '175' },
+//   { id: 7, name: '4' },
+//   { id: 8, name: '7' },
+//   { id: 9, name: '700' },
+//   { id: 10, name: '86A' },
+// ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function SelectOStop() {
-  const [selected, setSelected] = useState(routes[3])
+  const [selected, setSelected] = useState('')
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -43,21 +43,21 @@ export default function SelectOStop() {
               leaveTo="opacity-0"
             >
               <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                {routes.map((route) => (
+                {stops.map((stop) => (
                   <Listbox.Option
-                    key={route.id}
+                    key={stop.id}
                     className={({ active }) =>
                       classNames(
                         active ? 'text-white bg-green-600' : 'text-gray-900',
                         'cursor-default select-none relative py-2 pl-3 pr-9'
                       )
                     }
-                    value={route}
+                    value={stop}
                   >
                     {({ selected, active }) => (
                       <>
                         <span className={classNames(selected ? 'font-semibold' : 'font-normal', 'block truncate')}>
-                          {route.name}
+                          {stop.name}
                         </span>
 
                         {selected ? (
