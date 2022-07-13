@@ -1,4 +1,8 @@
+<<<<<<< HEAD:frontend/src/pages/Favorites.jsx
 import { Fragment, useState} from 'react'
+=======
+import { Fragment, useState, Popover} from 'react'
+>>>>>>> d25df6bde695e564acb57f4078fe4b73c546b543:frontend/src/Components/SidebarLayout.jsx
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   AnnotationIcon,
@@ -11,11 +15,19 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
+<<<<<<< HEAD:frontend/src/pages/Favorites.jsx
 import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
 import PlannerContainer from '../Components/PlannerContainer'
 
+=======
+import Map from './Map'
+import Inputstop from './Inputstop'
+import TestuseFetch from './TestuseFetch'
+import ComboboxLines from './ComboboxLines'
+import PlannerContainer from './PlannerContainer'
+>>>>>>> d25df6bde695e564acb57f4078fe4b73c546b543:frontend/src/Components/SidebarLayout.jsx
 
 
 const sidebarNavigation = [
@@ -75,6 +87,7 @@ export default function Planner() {
                 </Link>   
               ))}
 
+<<<<<<< HEAD:frontend/src/pages/Favorites.jsx
               {/* <Transition
                 as={Fragment}
                 enter="transition ease-out duration-200"
@@ -89,6 +102,23 @@ export default function Planner() {
                     <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                       
                     </div>
+=======
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-1"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 translate-y-1"
+                >
+                  <Menu.Items className="origin-top-left absolute left-200 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                    <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                      <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                      {/* <SelectRoute /> */}
+                   
+                     </div>
+>>>>>>> d25df6bde695e564acb57f4078fe4b73c546b543:frontend/src/Components/SidebarLayout.jsx
                   </div>
                 </Menu.Items>
               </Transition> */}
