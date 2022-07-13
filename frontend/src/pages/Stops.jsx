@@ -1,49 +1,30 @@
-/*
-  This layout requires Tailwind CSS v2.0+ 
-  
-  This layout requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
-
-import { Fragment, useState, Popover} from 'react'
+import { Fragment, useState} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   AnnotationIcon,
-  BellIcon,
+  // BellIcon,
   SwitchVerticalIcon,
   MenuAlt2Icon,
-  CloudIcon,
-  HeartIcon,
+  // CloudIcon,
+  // HeartIcon,
   MapIcon,
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import SelectRoute from '../Components/SelectRoute'
-import SelectStop from '../Components/SelectStop'
-import Calendar from '../Components/Calendar'
 import Map from '../Components/Map'
-import Inputstop from '../Components/Inputstop'
 import { Link } from 'react-router-dom'
+
+import Inputstop from '../Components/Inputstop'
+
 
 
 const sidebarNavigation = [
   { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
-  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
+  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
-  { name: 'Favorites', href: '#',  path:'/favorites', icon: HeartIcon, current: false },
-  { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
+  // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
+  // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
 
@@ -61,14 +42,6 @@ export default function Planner() {
 
   return (
     <>
-      {/*
-        This function requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-50">
-        <body class="h-full overflow-hidden">
-        ```
-      */}
       <div className="h-full flex">
         {/* Narrow sidebar */}
         <div className="hidden w-28 bg-green-700 overflow-y-auto md:block">
@@ -80,47 +53,46 @@ export default function Planner() {
                 alt="Transport for Ireland"
               />
             </div>
+    
             <Menu as="div" className="flex-1 mt-6 w-full px-2 space-y-1">
               {sidebarNavigation.map((item) => (
-                <Menu.Button
+                <Link to={item.path}  as='div'
                   key={item.name}
                   href={item.href}
                   className={classNames(
                     item.current ? 'bg-green-800 text-white' : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-300',
                     'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium'
                   )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                <Link to={item.path}> 
-
+                  aria-current={item.current ? 'page' : undefined} 
+                  > 
                   <item.icon
                     className={classNames(
-                      item.current ? 'text-white' : 'text-white group-hover:text-indigo-300',
-                      'h-6 w-6'
+                      item.current ? 'text-white place-items-center' : 'text-white group-hover:text-indigo-300',
+                      'h-6 w-6','place-items-center'
                     )}
                     aria-hidden="true" />
                   <span className="mt-2">{item.name}</span>
-                  </Link>
-                </Menu.Button>
+                </Link>   
               ))}
 
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 translate-y-1"
-                >
-                  <Menu.Items className="origin-top-left absolute left-200 mt-3 px-2 w-screen max-w-xs sm:px-0">
-                    <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                      <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                   
-                     </div>
+              {/* <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-150"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <Menu.Items className="origin-top-left absolute left-200 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                  <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                    <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                      
+                    </div>
                   </div>
-                  </Menu.Items>
-                </Transition>
+                </Menu.Items>
+              </Transition> */}
+
             </Menu>
           </div>
         </div>
@@ -181,28 +153,28 @@ export default function Planner() {
                     <nav className="h-full flex flex-col">
                       <div className="space-y-1">
                         {sidebarNavigation.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.href}
-                            className={classNames(
-                              item.current
-                                ? 'bg-green-800 text-white'
-                                : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-300',
-                              'group py-2 px-3 rounded-md flex items-center text-sm font-medium'
-                            )}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                          <Link to={item.path}> 
-                          <item.icon
-                            className={classNames(
-                              item.current ? 'text-white' : 'text-white group-hover:text-indigo-300',
-                              'mr-3 h-6 w-6'
-                            )}
-                            aria-hidden="true"
-                          />
-                          <span>{item.name}</span>
-                          </Link>
-                          </a>
+                        
+                            <Link to={item.path} key={item.name}
+                              
+                              href={item.href}
+                              className={classNames(
+                                item.current
+                                  ? 'bg-green-800 text-white'
+                                  : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-300',
+                                'group py-2 px-3 rounded-md flex items-center text-sm font-medium'
+                              )}
+                              aria-current={item.current ? 'page' : undefined}
+                            > 
+                              <item.icon
+                                className={classNames(
+                                  item.current ? 'text-white' : 'text-white group-hover:text-indigo-300',
+                                  'mr-3 h-6 w-6'
+                                )}
+                                aria-hidden="true"
+                              />
+                              <span>{item.name}</span> 
+                            </Link>
+                          
                         ))}
                       </div>
                     </nav>
@@ -229,8 +201,8 @@ export default function Planner() {
                 <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
               </button>
               <div className="flex-1 flex justify-between px-4 sm:px-6">
-               {/* <div className="flex-1 flex">
-                  <form className="w-full flex md:ml-0" action="#" method="GET">
+               <div className="flex-1 flex">
+                  {/* <form className="w-full flex md:ml-0" action="#" method="GET">
                     <label htmlFor="search-field" className="sr-only">
                       Search all files
                     </label>
@@ -246,8 +218,8 @@ export default function Planner() {
                         type="search"
                       />
                     </div>
-                  </form>
-                </div>*/}
+                  </form> */}
+                </div>
                 <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative flex-shrink-0">
@@ -289,14 +261,6 @@ export default function Planner() {
                       </Menu.Items>
                     </Transition>
                   </Menu>
-
-                  {/* <button
-                    type="button"
-                    className="flex bg-indigo-600 p-1 rounded-full items-center justify-center text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    <PlusSmIcon className="h-6 w-6" aria-hidden="true" />
-                    <span className="sr-only">Add file</span>
-                  </button> */}
                 </div>
               </div>
             </div>
@@ -304,32 +268,22 @@ export default function Planner() {
 
           {/* Main content */}
           <div className="flex items-stretch overflow-hidden">
+            
+            {/* Primary column */}
             <main className="overflow-y-auto w-96">
-              {/* Primary column */}
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-                <h1 id="primary-heading" className="sr-only">
-                  Photos
-                </h1>
                 <Inputstop />
-               
-              
-              
-                {/* 
-                 <div className="flex shrink w-full items-stretch overflow-hidden">
-              <Home />
-              </div>  
-                  */}
               </section>
             </main>
 
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
-              {/* Your content */}
               <div className="flex w-full items-stretch overflow-hidden">
-              <Map/>
+                <Map />
               </div>  
             </aside>
           </div>
+        
         </div>
         
       </div>

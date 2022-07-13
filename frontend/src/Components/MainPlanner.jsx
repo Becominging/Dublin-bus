@@ -1,7 +1,9 @@
 import { useEffect, Fragment, useState} from "react";
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import { SwitchHorizontalIcon } from '@heroicons/react/solid'
-
+import SelectStops from './SelectStops'
+import ComboboxStops from './ComboboxStops'
+import PickTime from './PickTime'
 
 // This is a subcomponent from the planner search system.
 // Allows the user to enter the Origin stop and the Destination stop
@@ -9,8 +11,8 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
   // States for the different fields the user has to enter 
   const [origin, setOrigin] = useState();
   const [destination, setDestination] = useState();
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedHour, setSelectedHour] = useState(new Date());
+  const [selectedTime, setSelectedTime] = useState(new Date());
+//   const [selectedHour, setSelectedHour] = useState(new Date());
   // State for the stops passed to the search bars
   const [validOriginStops, setValidOriginStops] = useState(selectedLine.stops);
   const [validDestinationStops, setValidDestinationStops] = useState(selectedLine.stops);
@@ -58,11 +60,15 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
     // eslint-disable-next-line
   }, [origin]);
 
+  console.log("Set Origin:",origin)
+  console.log("Set Destination:",destination)
+  console.log("Set Selected Time:",selectedTime)
+
   return (
     <>
-        {/* Information of Seleced Line  */}
-        <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
-            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+        {/* Display information of seleced line  */}
+        <div className="w-full flex flex-col items-center space-y- sm:items-end p-2">
+            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-auto">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
@@ -87,12 +93,39 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
               </div>
             </div>
         </div>
-         
+
+        {/* Select origin stop and destination stop */}
+        <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+          <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="p-2">
+              <div className="flex-shrink-0">
+                {/* <SelectStops stops={validOriginStops} selected={origin} setSelected={setOrigin} /> */}
+                <ComboboxStops stops={validOriginStops} selected={origin} setSelected={setOrigin} label={"Select your origin stop:"}/> 
+                <div className='pt-4'>
+                  {/* <SelectStops stops={validDestinationStops} selected={destination} setSelected={setDestination} /> */}
+                  <ComboboxStops stops={validDestinationStops} selected={destination} setSelected={setDestination} label={"Select your destination stop:"}/>      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+        {/* Select the departure time  */}
+        <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+          <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="p-2">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <PickTime setSelectedTime={setSelectedTime} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+            
     </>
       
-    
-
-   
 
   )
 }
