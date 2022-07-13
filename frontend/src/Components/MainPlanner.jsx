@@ -1,9 +1,9 @@
 import { useEffect, Fragment, useState} from "react";
-import { CheckCircleIcon } from '@heroicons/react/outline'
-import { SwitchHorizontalIcon } from '@heroicons/react/solid'
+import { CheckCircleIcon, SwitchHorizontalIcon, RefreshIcon} from '@heroicons/react/outline'
 import SelectStops from './SelectStops'
 import ComboboxStops from './ComboboxStops'
 import PickTime from './PickTime'
+import SearchButton from "./SearchButton";
 
 // This is a subcomponent from the planner search system.
 // Allows the user to enter the Origin stop and the Destination stop
@@ -12,18 +12,11 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
   const [origin, setOrigin] = useState();
   const [destination, setDestination] = useState();
   const [selectedTime, setSelectedTime] = useState(new Date());
-//   const [selectedHour, setSelectedHour] = useState(new Date());
   // State for the stops passed to the search bars
   const [validOriginStops, setValidOriginStops] = useState(selectedLine.stops);
   const [validDestinationStops, setValidDestinationStops] = useState(selectedLine.stops);
-  // State that when true the search can be performed
-  const [searchAvailable, setSearchAvailable] = useState(false);
-  // State to handle when the search is being performed
-  const [searchPending, setSearchPending] = useState(false);
-  // State to display the results 
-  const [searchResults, setSearchResults] = useState(null);
-  // State to handle the error
-  const [searchError, setSearchError] = useState(false);
+    // State that when true the search can be performed
+const [searchAvailable, setSearchAvailable] = useState(false);
 
   // Only allow the search if the user has entered origin and destination
   useEffect(() => {
@@ -71,13 +64,16 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
             <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-auto">
               <div className="p-4">
                 <div className="flex items-start">
+
                   <div className="flex-shrink-0">
                     <CheckCircleIcon className="h-6 w-6 text-green-400" aria-hidden="true" />
                   </div>
+
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">{selectedLine.route__route_short_name}</p>
                     <p className="mt-1 text-sm text-gray-500">{selectedLine.trip_headsign}</p>
                   </div>
+
                   <div className="ml-4 flex-shrink-0 flex">
                     <button
                       className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -85,10 +81,11 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
                         setSelectedLine(null)
                       }}
                     >
-                      <span className="sr-only">Close</span>
+                      <span className="sr-only">Search line again()</span>
                       <SwitchHorizontalIcon className="h-5 w-5" aria-hidden="true" />
                     </button>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -98,14 +95,30 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
         <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
           <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div className="p-2">
-              <div className="flex-shrink-0">
-                {/* <SelectStops stops={validOriginStops} selected={origin} setSelected={setOrigin} /> */}
-                <ComboboxStops stops={validOriginStops} selected={origin} setSelected={setOrigin} label={"Select your origin stop:"}/> 
-                <div className='pt-4'>
-                  {/* <SelectStops stops={validDestinationStops} selected={destination} setSelected={setDestination} /> */}
-                  <ComboboxStops stops={validDestinationStops} selected={destination} setSelected={setDestination} label={"Select your destination stop:"}/>      
+              <div className="flex items-start">
+              
+                <div>
+                  {/* <SelectStops stops={validOriginStops} selected={origin} setSelected={setOrigin} /> */}
+                  <ComboboxStops stops={validOriginStops} selected={origin} setSelected={setOrigin} label={"Select your origin stop:"}/> 
+                  <div className='pt-4'>
+                    {/* <SelectStops stops={validDestinationStops} selected={destination} setSelected={setDestination} /> */}
+                    <ComboboxStops stops={validDestinationStops} selected={destination} setSelected={setDestination} label={"Select your destination stop:"}/>      
+                  </div>
                 </div>
-              </div>
+
+                <div className="ml-4 flex-shrink-0 flex">
+                  <button
+                    className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={() => {
+                      cleanSearch()
+                    }}
+                  >
+                    <span className="sr-only">Clean Search</span>
+                    <RefreshIcon className="h-5 w-5" aria-hidden="true" />
+                  </button>
+               </div>
+
+              </div>            
             </div>
           </div>
         </div>
@@ -123,11 +136,17 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
             </div>
           </div>
         </div>
+       
+        <SearchButton/>
+
             
     </>
-      
-
   )
+  // Function to clean the search
+  function cleanSearch() {
+    setOrigin(null);
+    setDestination(null);
+  }
 }
 
 export default MainPlanner;
