@@ -1,4 +1,4 @@
-import useFetch from "../useFetch.js";
+import useFetch from "./useFetch.js";
 
 export default function TestuseFetch() {
   const { data: lines, loading, error } = useFetch("http://127.0.0.1:8000/lines/")

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { Combobox } from '@headlessui/react'
-import useFetch from "../useFetch.js";
+import useFetch from "./useFetch.js";
 
 
 function classNames(...classes) {

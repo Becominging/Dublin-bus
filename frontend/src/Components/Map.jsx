@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow} from '@react-google-maps/api';
-import stopsData from "../../src/data/stops.json";
+import stopsData from "../data/stops.json";
 
 const containerStyle = {
   width: '100%',
@@ -63,13 +63,13 @@ function Map() {
                         console.log("Selected Stop:",selectedStop) 
                       }}
                       icon={{
-                        url: "../../src/data/location.png",
+                        url: ".src/data/location.png",
                         scaledSize: new window.google.maps.Size(25, 25)
                       }}
                     />
                   ))}
             
-                  {selectedStop && (
+                 {/* {selectedStop && (
                     <InfoWindow
                       onCloseClick={() => {
                         setSelectedStop(null);
@@ -84,7 +84,7 @@ function Map() {
                         <p></p>
                       </div>
                     </InfoWindow>
-                  )}
+                  )} */}
                     
         <></>
       </GoogleMap>

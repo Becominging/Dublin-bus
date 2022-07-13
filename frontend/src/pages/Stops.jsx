@@ -29,24 +29,22 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import SelectRoute from './SelectRoute'
-import SelectStop from './SelectStop'
-import Calendar from './Calendar'
-import Map from './Map'
-import Inputstop from './Inputstop'
-import TestuseFetch from './TestuseFetch'
-import ComboboxLines from './ComboboxLines'
-import PlannerContainer from './PlannerContainer'
+import SelectRoute from '../Components/SelectRoute'
+import SelectStop from '../Components/SelectStop'
+import Calendar from '../Components/Calendar'
+import Map from '../Components/Map'
+import Inputstop from '../Components/Inputstop'
+import { Link } from 'react-router-dom'
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', icon: MapIcon, current: true },
-  { name: 'Rountes', href: '#', icon: SwitchVerticalIcon, current: false },
-  { name: 'Stops', href: '#', icon: SearchIcon, current: false },
+  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
+  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
+  { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
-  { name: 'Favorites', href: '#', icon: HeartIcon, current: false },
-  { name: 'Alert', href: '#', icon: BellIcon, current: false },
-  { name: 'Feedback', href: '#', icon: AnnotationIcon, current: false },
+  { name: 'Favorites', href: '#',  path:'/favorites', icon: HeartIcon, current: false },
+  { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
+  { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
 
 const userNavigation = [
@@ -58,7 +56,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function SidebarLayout() {
+export default function Planner() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -93,6 +91,8 @@ export default function SidebarLayout() {
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
+                <Link to={item.path}> 
+
                   <item.icon
                     className={classNames(
                       item.current ? 'text-white' : 'text-white group-hover:text-indigo-300',
@@ -100,6 +100,7 @@ export default function SidebarLayout() {
                     )}
                     aria-hidden="true" />
                   <span className="mt-2">{item.name}</span>
+                  </Link>
                 </Menu.Button>
               ))}
 
@@ -115,7 +116,6 @@ export default function SidebarLayout() {
                   <Menu.Items className="origin-top-left absolute left-200 mt-3 px-2 w-screen max-w-xs sm:px-0">
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                       <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                      <SelectRoute />
                    
                      </div>
                   </div>
@@ -192,14 +192,16 @@ export default function SidebarLayout() {
                             )}
                             aria-current={item.current ? 'page' : undefined}
                           >
-                            <item.icon
-                              className={classNames(
-                                item.current ? 'text-white' : 'text-white group-hover:text-indigo-300',
-                                'mr-3 h-6 w-6'
-                              )}
-                              aria-hidden="true"
-                            />
-                            <span>{item.name}</span>
+                          <Link to={item.path}> 
+                          <item.icon
+                            className={classNames(
+                              item.current ? 'text-white' : 'text-white group-hover:text-indigo-300',
+                              'mr-3 h-6 w-6'
+                            )}
+                            aria-hidden="true"
+                          />
+                          <span>{item.name}</span>
+                          </Link>
                           </a>
                         ))}
                       </div>
@@ -227,8 +229,8 @@ export default function SidebarLayout() {
                 <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
               </button>
               <div className="flex-1 flex justify-between px-4 sm:px-6">
-               <div className="flex-1 flex">
-                  {/* <form className="w-full flex md:ml-0" action="#" method="GET">
+               {/* <div className="flex-1 flex">
+                  <form className="w-full flex md:ml-0" action="#" method="GET">
                     <label htmlFor="search-field" className="sr-only">
                       Search all files
                     </label>
@@ -244,8 +246,8 @@ export default function SidebarLayout() {
                         type="search"
                       />
                     </div>
-                  </form> */}
-                </div>
+                  </form>
+                </div>*/}
                 <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative flex-shrink-0">
@@ -308,27 +310,26 @@ export default function SidebarLayout() {
                 <h1 id="primary-heading" className="sr-only">
                   Photos
                 </h1>
-                {/* <SelectRoute /> */}
-                {/* <SelectStop /> */}
-                {/* <Calendar /> */}
-                {/* <Inputstop /> */}
-
-                {/* < TestuseFetch /> */}
-                
-                <PlannerContainer />    
-                {/* <ComboboxLines /> */}
-              </section>  
+                <Inputstop />
+               
+              
+              
+                {/* 
+                 <div className="flex shrink w-full items-stretch overflow-hidden">
+              <Home />
+              </div>  
+                  */}
+              </section>
             </main>
 
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
               {/* Your content */}
               <div className="flex w-full items-stretch overflow-hidden">
-                <Map />
-              </div>
+              <Map/>
+              </div>  
             </aside>
           </div>
-
         </div>
         
       </div>
