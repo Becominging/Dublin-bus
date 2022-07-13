@@ -19,8 +19,8 @@ import Inputstop from '../Components/Inputstop'
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
-  { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
+  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current:false   },
+  { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: true },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },

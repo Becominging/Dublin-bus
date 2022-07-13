@@ -19,9 +19,9 @@ import PlannerContainer from '../Components/PlannerContainer'
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
+  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
-  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
+  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: true },
   // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
   // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
