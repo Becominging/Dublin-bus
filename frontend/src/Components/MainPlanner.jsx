@@ -62,7 +62,7 @@ const [searchAvailable, setSearchAvailable] = useState(false);
         {/* Display information of seleced line  */}
         <div className="w-full flex flex-col items-center space-y- sm:items-end p-2">
             <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-auto">
-              <div className="p-4">
+              <div className="p-2">
                 <div className="flex items-start">
 
                   <div className="flex-shrink-0">
