@@ -14,6 +14,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
+
 import HeaderLogo from '../Components/HeaderLogo'
 import WeatherWidget from '../Components/WeatherWidget'
 
