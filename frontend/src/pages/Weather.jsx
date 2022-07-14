@@ -15,15 +15,14 @@ import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
 import HeaderLogo from '../Components/HeaderLogo'
-import Stops from '../Components/Stops'
-
+import WeatherWidget from '../Components/WeatherWidget'
 
 
 const sidebarNavigation = [
   { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
-  { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: true },
+  { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
-  { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
+  { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: true },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
   // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
@@ -193,6 +192,7 @@ export default function Planner() {
         <div className="flex-1 flex flex-col overflow-hidden">
           <header className="w-full">
             <div className="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
+              
               <button
                 type="button"
                 className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600 md:hidden"
@@ -201,13 +201,13 @@ export default function Planner() {
                 <span className="sr-only">Open sidebar</span>
                 <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
               </button>
-
+              
               <div className="flex-1 flex justify-between px-4 sm:px-6">
                
                <div className="flex-1 flex">
                 <HeaderLogo />
                </div>
-
+                
                 <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative flex-shrink-0">
@@ -257,10 +257,11 @@ export default function Planner() {
           {/* Main content */}
           <div className="flex items-stretch overflow-hidden">
             
-            {/* Primary column */}
+            {/* Primary column */}           
             <main className="overflow-y-auto w-96">
-              <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-                {/* <Stops /> */}
+              <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">                               
+               <WeatherWidget />
+
               </section>
             </main>
 
@@ -270,6 +271,7 @@ export default function Planner() {
                 <Map />
               </div>  
             </aside>
+
           </div>
         
         </div>

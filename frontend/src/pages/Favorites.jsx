@@ -5,7 +5,7 @@ import {
   // BellIcon,
   SwitchVerticalIcon,
   MenuAlt2Icon,
-  // CloudIcon,
+  CloudIcon,
   // HeartIcon,
   MapIcon,
   XIcon,
@@ -14,6 +14,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
+import HeaderLogo from '../Components/HeaderLogo'
 import PlannerContainer from '../Components/PlannerContainer'
 
 
@@ -22,7 +23,7 @@ const sidebarNavigation = [
   { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
-  // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
+  { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
   // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },

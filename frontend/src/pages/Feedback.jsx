@@ -5,7 +5,7 @@ import {
   // BellIcon,
   SwitchVerticalIcon,
   MenuAlt2Icon,
-  // CloudIcon,
+  CloudIcon,
   // HeartIcon,
   MapIcon,
   XIcon,
@@ -14,18 +14,17 @@ import { SearchIcon } from '@heroicons/react/solid'
 import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
-import PlannerContainer from '../Components/PlannerContainer'
-
+import HeaderLogo from '../Components/HeaderLogo'
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
+  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
-  // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
+  { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
   // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
-  { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
+  { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: true },
 ]
 
 const userNavigation = [
@@ -60,7 +59,7 @@ export default function Planner() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-green-800 text-white' : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-300',
+                    item.current ? 'bg-green-800 text-white' : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-400',
                     'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined} 
@@ -192,6 +191,7 @@ export default function Planner() {
         <div className="flex-1 flex flex-col overflow-hidden">
           <header className="w-full">
             <div className="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
+              
               <button
                 type="button"
                 className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600 md:hidden"
@@ -200,26 +200,13 @@ export default function Planner() {
                 <span className="sr-only">Open sidebar</span>
                 <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
               </button>
+              
               <div className="flex-1 flex justify-between px-4 sm:px-6">
+               
                <div className="flex-1 flex">
-                  {/* <form className="w-full flex md:ml-0" action="#" method="GET">
-                    <label htmlFor="search-field" className="sr-only">
-                      Search all files
-                    </label>
-                    <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                        <SearchIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
-                      </div>
-                      <input
-                        name="search-field"
-                        id="search-field"
-                        className="h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400"
-                        placeholder="Search"
-                        type="search"
-                      />
-                    </div>
-                  </form> */}
-                </div>
+                <HeaderLogo />
+               </div>
+                
                 <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative flex-shrink-0">
@@ -269,21 +256,32 @@ export default function Planner() {
           {/* Main content */}
           <div className="flex items-stretch overflow-hidden">
             
-            {/* Primary column */}
+            {/* Primary column */}           
             <main className="overflow-y-auto w-96">
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
+                
                 <div className='Feedback'>
                   <form method='POST' action="https://getform.io/f/88d3345f-5af7-45fa-8de0-ae29296ac12e" className='flex flex-col max-w-[600px] w-full'>
-                    <div className='pb-8'>
-                      <p className='text-4xl font-bold inline border-b-4 border-green-600 text-gray-300'>Feedback</p>
-                      <p className='text-gray-300 py-4'>// Submit the form below or shoot me an email - zhilin.yang@ucdconnect.ie</p>
+                    
+                    <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+                      <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+                        <div className="p-2">
+
+                          <div className='p-2'>
+                            <p className='text-4xl font-bold inline border-b-4 border-green-600 text-gray-300'>Feedback</p>
+                            <p className='text-gray-300 py-4'>// Submit the form below or shoot me an email - zhilin.yang@ucdconnect.ie</p>
+                          </div>                   
+                          <input className="w-full font-light rounded-md border border-gray-300 bg-white my-4 py-2 pl-3 pr-10 shadow-sm focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-green-400 sm:text-sm" type="text" placeholder='Name' name='name' />
+                          <input className="w-full font-light rounded-md border border-gray-300 bg-white my-4 py-2 pl-3 pr-10 shadow-sm focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-green-400 sm:text-sm" type="email" placeholder='Email' name='email' />
+                          <textarea className="w-full font-light rounded-md border border-gray-300 bg-white my-4 py-2 pl-3 pr-10 shadow-sm focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-green-400 sm:text-sm" name="message" rows="10" placeholder='Message'></textarea>
+                          <button className="flex place-content-center w-full items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400">Submit Feedback</button>
+                        </div>
+                      </div>
                     </div>
-                    <input className='bg-[#ccf6df] p-2' type="text" placeholder='Name' name='name' />
-                    <input className='my-4 p-2 bg-[#ccf6df]' type="email" placeholder='Email' name='email' />
-                    <textarea className='bg-[#ccf6df] p-2' name="message" rows="10" placeholder='Message'></textarea>
-                    <button className='text-gray-300 border-2 hover:bg-[#ccf6df] hover:border-green-600 px-4 py-3 my-8 mx-auto flex items-center'>Submit Feedback</button>
+                  
                   </form>    
                 </div>
+
               </section>
             </main>
 
@@ -293,6 +291,7 @@ export default function Planner() {
                 <Map />
               </div>  
             </aside>
+
           </div>
         
         </div>

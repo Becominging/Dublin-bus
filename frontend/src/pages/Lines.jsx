@@ -5,7 +5,7 @@ import {
   // BellIcon,
   SwitchVerticalIcon,
   MenuAlt2Icon,
-  // CloudIcon,
+  CloudIcon,
   // HeartIcon,
   MapIcon,
   XIcon,
@@ -14,15 +14,16 @@ import { SearchIcon } from '@heroicons/react/solid'
 import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
-import PlannerContainer from '../Components/PlannerContainer'
+import HeaderLogo from '../Components/HeaderLogo'
+import Lines from '../Components/Lines'
 
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
+  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
-  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
-  // { name: 'Weather', href: '#', icon: CloudIcon, current: true },
+  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: true},
+  { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
   // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
@@ -60,7 +61,7 @@ export default function Planner() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-green-800 text-white' : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-300',
+                    item.current ? 'bg-green-800 text-white' : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-400',
                     'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined} 
@@ -200,26 +201,13 @@ export default function Planner() {
                 <span className="sr-only">Open sidebar</span>
                 <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
               </button>
+              
               <div className="flex-1 flex justify-between px-4 sm:px-6">
+               
                <div className="flex-1 flex">
-                  {/* <form className="w-full flex md:ml-0" action="#" method="GET">
-                    <label htmlFor="search-field" className="sr-only">
-                      Search all files
-                    </label>
-                    <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                        <SearchIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
-                      </div>
-                      <input
-                        name="search-field"
-                        id="search-field"
-                        className="h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400"
-                        placeholder="Search"
-                        type="search"
-                      />
-                    </div>
-                  </form> */}
-                </div>
+                <HeaderLogo />
+               </div>
+
                 <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative flex-shrink-0">
@@ -272,7 +260,7 @@ export default function Planner() {
             {/* Primary column */}
             <main className="overflow-y-auto w-96">
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-                <PlannerContainer />
+                {/* <Lines /> */}
               </section>
             </main>
 

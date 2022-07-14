@@ -97,7 +97,7 @@ const [searchAvailable, setSearchAvailable] = useState(false);
             <div className="p-2">
               <div className="flex items-start">
               
-                <div>
+                <div className="w-full">
                   {/* <SelectStops stops={validOriginStops} selected={origin} setSelected={setOrigin} /> */}
                   <ComboboxStops stops={validOriginStops} selected={origin} setSelected={setOrigin} label={"Select your origin stop:"}/> 
                   <div className='pt-4'>
@@ -106,7 +106,7 @@ const [searchAvailable, setSearchAvailable] = useState(false);
                   </div>
                 </div>
 
-                <div className="ml-4 flex-shrink-0 flex">
+                <div className="ml-3 flex-shrink-0 flex">
                   <button
                     className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onClick={() => {
@@ -128,7 +128,7 @@ const [searchAvailable, setSearchAvailable] = useState(false);
         <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
           <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div className="p-2">
-              <div className="flex items-start">
+              <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <PickTime setSelectedTime={setSelectedTime} />
                 </div>
@@ -136,8 +136,9 @@ const [searchAvailable, setSearchAvailable] = useState(false);
             </div>
           </div>
         </div>
-       
-        <SearchButton/>
+
+        <div className="p-2"><SearchButton/></div>
+        
 
             
     </>
