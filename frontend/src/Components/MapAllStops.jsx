@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow} from '@react-google-maps/api';
-import stopsData from "../../src/data/stops.json";
+import stopsData from "../data/stops.json";
+import stopIcon from "../../src/data/bus_stop.png"
 
 const containerStyle = {
   width: '100%',
@@ -15,7 +16,7 @@ const center = {
   };
 
 
-function Map() {
+function MapAllStops() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
@@ -43,7 +44,7 @@ function Map() {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={12}
+        zoom={14}
         // onLoad={onLoad}
         // onUnmount={onUnmount}
       >
@@ -64,8 +65,8 @@ function Map() {
                         console.log("Selected Stop:",selectedStop) 
                       }}
                       icon={{
-                        url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-                        scaledSize: new window.google.maps.Size(25, 25)
+                        url: stopIcon,
+                        scaledSize: new window.google.maps.Size(15, 15)
                       }}
                     />
                   ))}
@@ -75,4 +76,4 @@ function Map() {
   ) : <></>
 }
 
-export default React.memo(Map) 
+export default React.memo(MapAllStops) 

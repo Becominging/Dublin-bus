@@ -11,11 +11,11 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
 import HeaderLogo from '../Components/HeaderLogo'
 import Stops from '../Components/Stops'
+import MapAllStops from '../Components/MapAllStops'
 
 
 
@@ -267,7 +267,7 @@ export default function Planner() {
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
               <div className="flex w-full items-stretch overflow-hidden">
-                <Map />
+                <MapAllStops />
               </div>  
             </aside>
           </div>
