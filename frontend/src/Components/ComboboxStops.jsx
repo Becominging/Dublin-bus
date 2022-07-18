@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const ComboboxLines = ({ stops, selected, setSelected, label}) => {
+const ComboboxStops = ({ stops, selectedStop, setSelectedStop, label}) => {
   
   const [query, setQuery] = useState('')
   
@@ -25,7 +25,7 @@ const ComboboxLines = ({ stops, selected, setSelected, label}) => {
         <div className="relative mt-1">
           <Combobox.Input
             className="w-full font-extralight rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-green-400 sm:text-sm"
-            placeholder={selected&&selected['stop_name']}
+            placeholder={selectedStop && selectedStop['stop_name']}
             onChange={(event) => setQuery(event.target.value)}
             displayValue={(stop) => stop && stop['stop_name']} />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
@@ -68,11 +68,11 @@ const ComboboxLines = ({ stops, selected, setSelected, label}) => {
  ) 
 
  function handleSubmit(stop) {
-  setSelected(stop);
+  setSelectedStop(stop);
 }
 
 }
 
-export default ComboboxLines;
+export default ComboboxStops;
 
    

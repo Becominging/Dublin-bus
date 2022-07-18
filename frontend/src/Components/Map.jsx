@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow} from '@react-google-maps/api';
-import stopsData from "../data/stops.json";
+import stopsData from "../../src/data/stops.json";
 
 const containerStyle = {
   width: '100%',
@@ -24,7 +24,8 @@ function Map() {
   const onLoad = React.useCallback(function callback(map) {const bounds = new window.google.maps.LatLngBounds(center); map.fitBounds(bounds); setMap(map)}, [])
   const onUnmount = React.useCallback(function callback(map) {setMap(null)}, [])
   const [selectedStop, setSelectedStop] = useState(null);
- 
+  console.log("All Stops:",stopsData)
+
   useEffect(() => {
         const listener = e => {
           if (e.key === "Escape") {
@@ -32,63 +33,46 @@ function Map() {
           }
         };
         window.addEventListener("keydown", listener);
-    
+
         return () => {
           window.removeEventListener("keydown", listener);
         };
       }, []);
- 
+
   return isLoaded ? (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
+        zoom={12}
+        // onLoad={onLoad}
+        // onUnmount={onUnmount}
       >
         { /* Child components, such as markers, info windows, etc. */ }
-    
+
         {
             stopsData.RECORDS.map(stop => (
-                    
+
                     <Marker
                       key={stop.stop_id}
                       position={{
                         lat: stop.stop_lat,
                         lng: stop.stop_lon
                       }}
-                      
+
                       onClick={() => {
                         setSelectedStop(stop);
                         console.log("Selected Stop:",selectedStop) 
                       }}
                       icon={{
-                        url: ".src/data/location.png",
+                        url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
                         scaledSize: new window.google.maps.Size(25, 25)
                       }}
                     />
                   ))}
-            
-                 {/* {selectedStop && (
-                    <InfoWindow
-                      onCloseClick={() => {
-                        setSelectedStop(null);
-                      }}
-                      position={{
-                        lat: stop.stop_lat,
-                        lng: stop.stop_lon
-                      }}
-                    >
-                      <div>
-                        <h2>"info"</h2>
-                        <p></p>
-                      </div>
-                    </InfoWindow>
-                  )} */}
-                    
-        <></>
+
+                  
       </GoogleMap>
   ) : <></>
 }
 
-export default React.memo(Map)
+export default React.memo(Map) 

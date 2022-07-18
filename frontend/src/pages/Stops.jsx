@@ -260,7 +260,7 @@ export default function Planner() {
             {/* Primary column */}
             <main className="overflow-y-auto w-96">
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-                {/* <Stops /> */}
+                <Stops />
               </section>
             </main>
 

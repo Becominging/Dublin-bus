@@ -59,8 +59,12 @@ const [searchAvailable, setSearchAvailable] = useState(false);
 
   return (
     <>
+    <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+    <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+    <div className="p-2">
+
         {/* Display information of seleced line  */}
-        <div className="w-full flex flex-col items-center space-y- sm:items-end p-2">
+        <div className="w-full flex flex-col items-center space-y- sm:items-end px-0 py-2">
             <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-auto">
               <div className="p-2">
                 <div className="flex items-start">
@@ -92,17 +96,17 @@ const [searchAvailable, setSearchAvailable] = useState(false);
         </div>
 
         {/* Select origin stop and destination stop */}
-        <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+        <div className="w-full flex flex-col items-center space-y-8 sm:items-end px-0 py-2">
           <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div className="p-2">
               <div className="flex items-start">
               
                 <div className="w-full">
                   {/* <SelectStops stops={validOriginStops} selected={origin} setSelected={setOrigin} /> */}
-                  <ComboboxStops stops={validOriginStops} selected={origin} setSelected={setOrigin} label={"Select your origin stop:"}/> 
+                  <ComboboxStops stops={validOriginStops} selectedStop={origin} setSelectedStop={setOrigin} label={"Select your origin stop:"}/> 
                   <div className='pt-4'>
                     {/* <SelectStops stops={validDestinationStops} selected={destination} setSelected={setDestination} /> */}
-                    <ComboboxStops stops={validDestinationStops} selected={destination} setSelected={setDestination} label={"Select your destination stop:"}/>      
+                    <ComboboxStops stops={validDestinationStops} selectedStop={destination} setSelectedStop={setDestination} label={"Select your destination stop:"}/>      
                   </div>
                 </div>
 
@@ -125,7 +129,7 @@ const [searchAvailable, setSearchAvailable] = useState(false);
         
 
         {/* Select the departure time  */}
-        <div className="w-full flex flex-col items-center space-y-8 sm:items-end p-2">
+        <div className="w-full flex flex-col items-center space-y-8 sm:items-end px-0 py-2">
           <div className="max-w-sm mx-auto w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
             <div className="p-2">
               <div className="flex items-center">
@@ -139,10 +143,12 @@ const [searchAvailable, setSearchAvailable] = useState(false);
 
         <div className="p-2"><SearchButton/></div>
         
-
-            
+    </div>
+    </div>
+    </div>       
     </>
   )
+  
   // Function to clean the search
   function cleanSearch() {
     setOrigin(null);

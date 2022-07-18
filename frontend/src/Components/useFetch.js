@@ -14,7 +14,7 @@ export default function useFetch(url) {
       axios.get(url, { cancelToken: source.token })
       .then(res => {
           setLoading(false);
-          console.log("What we have fetched:",res)
+          console.log("What we have fetched():",res)
           setData(res.data);
       })
       .catch(err => {
