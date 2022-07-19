@@ -25,10 +25,9 @@ const sidebarNavigation = [
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
-  { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
+  { name: 'Donate', href: '#',  path:'/donate', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
-
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Sign out', href: '#' },
