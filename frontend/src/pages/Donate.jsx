@@ -2,7 +2,7 @@ import { Fragment, useState} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   AnnotationIcon,
-  // BellIcon,
+  BellIcon,
   SwitchVerticalIcon,
   MenuAlt2Icon,
   CloudIcon,
@@ -11,11 +11,12 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import MapAllStops from '../Components/MapAllStops'
+import Map from '../Components/Map'
 import { Link } from 'react-router-dom'
 
 import HeaderLogo from '../Components/HeaderLogo'
-import PlannerContainer from '../Components/PlannerContainer'
+import Stripe from '../Components/stripe'
+
 
 
 
@@ -25,10 +26,10 @@ const sidebarNavigation = [
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
   // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
-  // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
   { name: 'Donate', href: '#',  path:'/donate', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
+
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Sign out', href: '#' },
@@ -38,7 +39,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Planner() {
+export default function Donate() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -260,14 +261,14 @@ export default function Planner() {
             {/* Primary column */}
             <main className="overflow-y-auto w-96">
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-                <PlannerContainer />
+              {/* <ProductDisplay />*/}
               </section>
             </main>
 
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
               <div className="flex w-full items-stretch overflow-hidden">
-                <MapAllStops />
+                <Map />
               </div>  
             </aside>
           </div>
