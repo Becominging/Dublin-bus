@@ -1,14 +1,9 @@
-import { useState } from "react";
-import useFetch from "./useFetch.js";
+
 import ComboboxLines from './ComboboxLines'
 import LineInfo from './LineInfo'
 
-export default function Lines() {
-  // State to select a line
-  const [selectedLine, setSelectedLine] = useState("");
-
-  // Get the data from backend
-  const { data: lines, loading, error } = useFetch("http://127.0.0.1:8000/lines/");
+const Lines= ({ lines, selectedLine, setSelectedLine }) => {
+ 
 
   return (
     <>
@@ -24,3 +19,5 @@ export default function Lines() {
     </>
   )
 }
+
+export default Lines;
