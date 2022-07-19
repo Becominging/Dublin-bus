@@ -54,7 +54,7 @@ const MapLine= ({ selectedLine }) => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={14}
+        zoom={12}
       > 
 
         { /* Child components, such as markers, info windows, etc. */ }

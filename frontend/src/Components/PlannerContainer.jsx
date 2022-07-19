@@ -8,7 +8,7 @@ export default function PlannerContainer() {
     // Get the data from backend
     const { data: lines, loading, error } = useFetch("http://127.0.0.1:8000/lines/");
     
-    // This state controls if a line has been selected before displayingthe planner system
+    // This state controls if a line has been selected before displayingthe main planner
     const [selectedLine, setSelectedLine] = useState();
     console.log("Selected Line:", selectedLine) 
    
@@ -16,9 +16,9 @@ export default function PlannerContainer() {
     return (
     <div>
       {/* Combobox for selecting the line */}
-      {!selectedLine && <div>
+      {!selectedLine &&
         <ComboboxLines lines={lines} setSelectedLine={setSelectedLine} />
-      </div>}
+      }
       {/* Display the main part of the planner */}
       {selectedLine && <MainPlanner selectedLine={selectedLine} setSelectedLine={setSelectedLine} />}
     </div>
