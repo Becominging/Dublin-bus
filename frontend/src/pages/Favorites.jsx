@@ -6,7 +6,7 @@ import {
   SwitchVerticalIcon,
   MenuAlt2Icon,
   CloudIcon,
-  // HeartIcon,
+  HeartIcon,
   MapIcon,
   XIcon,
 } from '@heroicons/react/outline'
@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom'
 
 import HeaderLogo from '../Components/HeaderLogo'
 import PlannerContainer from '../Components/PlannerContainer'
+import Login from '../Components/Login'
 
 
 
@@ -24,7 +25,7 @@ const sidebarNavigation = [
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
-  // { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
+  { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
   // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
@@ -273,7 +274,7 @@ export default function Planner() {
             {/* Primary column */}
             <main className="overflow-y-auto w-96">
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-                <PlannerContainer />
+                <Login  />
               </section>
             </main>
 
