@@ -1,5 +1,7 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker, Polyline} from '@react-google-maps/api';
+import { useGeolocated } from "react-geolocated";
+import CurrentLocationIcon from "../../src/data/current_location.png"
 
 const containerStyle = {
   width: '100%',
@@ -8,10 +10,6 @@ const containerStyle = {
   display: 'flex'
 };
 
-const center = {
-    lat: 53.3501,
-    lng: -6.2661
-  };
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -19,6 +17,19 @@ function Map() {
     googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
   })
 
+  const {
+    coords,
+    } = useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+    })
+
+    const center = {
+      lat: coords&&coords.latitude,
+      lng: coords&&coords.longitude
+    };
  
   return isLoaded ? (  
       <GoogleMap
@@ -28,7 +39,20 @@ function Map() {
       > 
 
         { /* Child components, such as markers, info windows, etc. */ }
-                
+        {/* Displaying User or Device Position on Maps  */}
+        {coords&&
+          <Marker
+            position={{
+              lat: coords.latitude,
+              lng: coords.longitude
+            }}
+            icon={{
+              url: CurrentLocationIcon,
+              scaledSize: new window.google.maps.Size(50, 50)
+            }}  
+          />
+        }
+
       </GoogleMap>
   ) : <></>
 }

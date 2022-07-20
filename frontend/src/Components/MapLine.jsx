@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, Polyline, InfoWindow} from '@react-google-maps/api';
+import { useGeolocated } from "react-geolocated";
 import useFetch from "./useFetch.js";
 import stopIcon from "../../src/data/bus_stop.png"
+import CurrentLocationIcon from "../../src/data/current_location.png"
+
 
 const containerStyle = {
   width: '100%',
@@ -27,6 +30,15 @@ const MapLine= ({ selectedLine }) => {
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
   })
+
+  const {
+    coords,
+    } = useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+    })
 
   // State to handle the path of the line
   const [path, setPath] = useState();
@@ -60,7 +72,20 @@ const MapLine= ({ selectedLine }) => {
       > 
 
         { /* Child components, such as markers, info windows, etc. */ }
-          
+          {/* Displaying User or Device Position on Maps  */}
+          {coords&&
+            <Marker
+              position={{
+                lat: coords.latitude,
+                lng: coords.longitude
+              }}
+              icon={{
+                url: CurrentLocationIcon,
+                scaledSize: new window.google.maps.Size(50, 50)
+              }}  
+            />
+          }
+
           {/* Display the line path*/}
           <Polyline
             options={options}
