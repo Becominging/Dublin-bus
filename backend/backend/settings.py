@@ -60,13 +60,33 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema'
 }
 
+
 CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
-    "https://sub.example.com",
     "http://localhost:8080",
     "http://127.0.0.1:9000",
+    "http://localhost:3000"
 ]
 
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    # "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -97,16 +117,39 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',  # 数据库名字
+#         'USER': 'postgres',
+#         'PASSWORD': 'dubl1nBusGroup11',
+#         'HOST': 'dublinbus.cr4yv0e7s6yb.us-east-1.rds.amazonaws.com',  # 那台机器安装了MySQL
+#         'PORT': 1150,
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbus',  # 数据库名字
+        'NAME': 'postgres',  # 数据库名字
         'USER': 'postgres',
-        'PASSWORD': '961225',
-        'HOST': '127.0.0.1',  # 那台机器安装了MySQL
+        'PASSWORD': 'dubl1nBusGroup11',
+        'HOST': 'dublinbus-eire.c5xhg5nlmfpi.eu-west-1.rds.amazonaws.com',  # 那台机器安装了MySQL
         'PORT': 5432,
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dbus',  # 数据库名字
+#         'USER': 'postgres',
+#         'PASSWORD': '961225',
+#         'HOST': '127.0.0.1',  # 那台机器安装了MySQL
+#         'PORT': 5432,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

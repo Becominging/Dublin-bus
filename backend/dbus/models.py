@@ -74,10 +74,3 @@ class StopTime(models.Model):
     class Meta:
         db_table = "stop_times"
 
-
-class RoutesPassed(models.Model):
-    stop = models.ForeignKey(Stop, on_delete=models.CASCADE)
-    routes_passed = models.CharField(max_length=100)
-
-    class Meta:
-        db_table = "routes_passed"

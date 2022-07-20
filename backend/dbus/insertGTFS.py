@@ -1,8 +1,7 @@
 import re
 from datetime import datetime
 from csv import reader
-import pandas as pd
-from dbus.models import Calendar, Stop, Route, Shape, Trip, StopTime, RoutesPassed
+from dbus.models import Calendar, Stop, Route, Shape, Trip, StopTime
 
 
 # Deleting data in database
@@ -12,7 +11,6 @@ Shape.objects.all().delete() # PK shape_id
 Calendar.objects.all().delete() # PK service_id
 Trip.objects.all().delete() # PK trip_id , FK route, FK calendar
 StopTime.objects.all().delete() # FK trip, FK stop
-RoutesPassed.objects.all().delete() # FK stop
 
 print('Deleting finish')
 
@@ -208,30 +206,3 @@ with open('gtfs/stop_times.txt') as stop_times_file:
             continue
 
 print('stop_times.txt has been inserted')
-
-
-
-# Create data in table routes_passed from the other tables
-def get_routes_passed(stop_id):
-
-    trip_ids_qs = StopTime.objects.filter(stop_id=stop_id).values('trip__route__route_short_name')
-    trip_ids = pd.DataFrame(list(trip_ids_qs))
-    return trip_ids["trip__route__route_short_name"].unique()
-
-stops = list(Stop.objects.values())
-
-
-# Insert routes_passed data into this table
-for stop in stops:
-
-    routes_passed = get_routes_passed(stop['stop_id'])
-
-    for route_passed in routes_passed:
-        r = RoutesPassed(
-            stop=Stop.objects.get(stop_id=stop['stop_id']),
-            routes_passed=route_passed
-        )
-
-        r.save()
-
-print('routes_passed data has been inserted')
