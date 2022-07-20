@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GoogleMap, useJsApiLoader, Marker, Polyline} from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker, Polyline, InfoWindow} from '@react-google-maps/api';
 import useFetch from "./useFetch.js";
 import stopIcon from "../../src/data/bus_stop.png"
 
@@ -30,6 +30,8 @@ const MapLine= ({ selectedLine }) => {
 
   // State to handle the path of the line
   const [path, setPath] = useState();
+  // State to Mouseover a stop
+  const [hoverStop, setHoverStop] = useState("");
 
   // Get the data from the backend
   const {data: shape, loading:loading_shape, error:error_shape} = useFetch("http://127.0.0.1:8000/shape_of_trip/"+ selectedLine['trip_id']+'/')
@@ -74,6 +76,10 @@ const MapLine= ({ selectedLine }) => {
                   lat: stop['stop_lat'],
                   lng: stop['stop_lon']
                 }}
+                onMouseOver={() => {
+                  setHoverStop(stop);
+                  console.log("Hover Stop:",stop) 
+                }}
                 onClick={() => {
                         // setSelectedStop(stop);
                   console.log("Selected stop:",stop) 
@@ -85,6 +91,22 @@ const MapLine= ({ selectedLine }) => {
               />
             )
           })}
+
+          {hoverStop && 
+            <InfoWindow
+              onCloseClick={() => {
+                hoverStop(null);
+                }}
+              position={{
+                lat: hoverStop.stop_lat+0.00004,
+                lng: hoverStop.stop_lon
+              }}
+              >
+              <div>
+                <h2>{hoverStop['stop_name']}</h2>
+                </div>
+            </InfoWindow>
+          } 
          
       </GoogleMap>
   ) : <></>
