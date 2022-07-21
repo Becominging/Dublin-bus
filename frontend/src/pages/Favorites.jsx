@@ -21,11 +21,11 @@ import Login from '../Components/Login'
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
+  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
-  { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
+  { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current:  true},
   // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
@@ -44,9 +44,9 @@ export default function Planner() {
 
   return (
     <>
-      <div className="h-full flex">
+      <div className="h-full flex dark:bg-black">
         {/* Narrow sidebar */}
-        <div className="hidden w-28 bg-green-700 overflow-y-auto md:block">
+        <div className="hidden w-28 bg-green-700 dark:bg-black overflow-y-auto md:block">
           <div className="w-full py-6 flex flex-col items-center">
             <div className="flex-shrink-0 flex items-center">
               <img
@@ -62,14 +62,14 @@ export default function Planner() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-green-800 text-white' : 'text-indigo-100 hover:bg-yellow-300 hover:text-indigo-300',
+                    item.current ? 'bg-green-800 dark:bg-white text-white dark:text-green-300' : 'text-indigo-100 hover:bg-yellow-300 dark:hover:bg-white dark:hover:text-green-300 hover:text-indigo-300',
                     'group w-full p-3 rounded-md flex flex-col items-center text-xs font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined} 
                   > 
                   <item.icon
                     className={classNames(
-                      item.current ? 'text-white place-items-center' : 'text-white group-hover:text-indigo-300',
+                      item.current ? 'text-white dark:text-green-300 place-items-center' : 'text-white group-hover:text-indigo-300 dark:group-hover:text-green-300',
                       'h-6 w-6','place-items-center'
                     )}
                     aria-hidden="true" />
@@ -193,7 +193,7 @@ export default function Planner() {
         {/* Header area */}
         <div className="flex-1 flex flex-col overflow-hidden">
           <header className="w-full">
-            <div className="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
+            <div className="relative z-10 flex-shrink-0 h-16 bg-white dark:bg-black  border-b border-gray-200 shadow-sm flex">
               <button
                 type="button"
                 className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600 md:hidden"
@@ -279,7 +279,7 @@ export default function Planner() {
             </main>
 
             {/* Secondary column (hidden on smaller screens) */}
-            <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
+            <aside className="hidden w-full bg-white border-l dark:bg-black border-gray-200 overflow-y-auto lg:block">
               <div className="flex w-full items-stretch overflow-hidden">
                 <MapAllStops />
               </div>  
