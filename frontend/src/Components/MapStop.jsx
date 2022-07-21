@@ -1,6 +1,9 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader, Marker} from '@react-google-maps/api';
+import { useGeolocated } from "react-geolocated";
 import stopIcon from "../../src/data/location.png"
+import CurrentLocationIcon from "../../src/data/current_location.png"
+
 
 const containerStyle = {
   width: '100%',
@@ -8,11 +11,6 @@ const containerStyle = {
   position: 'relative',  
   display: 'flex'
 };
-
-// const center = {
-//     lat: 53.3501,
-//     lng: -6.2661
-//   };
 
 const MapStop= ({ selectedStop }) => {
   const { isLoaded } = useJsApiLoader({
@@ -25,6 +23,15 @@ const MapStop= ({ selectedStop }) => {
     lng: selectedStop['stop_lon']
   };
 
+  const {
+    coords,
+    } = useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+    })
+
   return isLoaded ? (  
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -33,6 +40,22 @@ const MapStop= ({ selectedStop }) => {
       > 
 
         { /* Child components, such as markers, info windows, etc. */ }       
+        
+        {/* Displaying User or Device Position on Maps  */}
+        {coords&&
+          <Marker
+            position={{
+              lat: coords.latitude,
+              lng: coords.longitude
+            }}
+            icon={{
+              url: CurrentLocationIcon,
+              scaledSize: new window.google.maps.Size(50, 50)
+            }}  
+          />
+        }
+        
+        
         <Marker
           position={{
             lat: selectedStop['stop_lat'],

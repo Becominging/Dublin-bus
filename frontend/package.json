@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.21.6",
     "axios": "^0.27.2",
+    "react-geolocated": "^4.0.3",
     "react-open-weather": "^1.2.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

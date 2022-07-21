@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow} from '@react-google-maps/api';
+import { useGeolocated } from "react-geolocated";
 import stopsData from "../data/stops.json";
 import stopIcon from "../../src/data/bus_stop.png"
+import CurrentLocationIcon from "../../src/data/current_location.png"
+
 
 const containerStyle = {
   width: '100%',
@@ -10,19 +13,27 @@ const containerStyle = {
   display: 'flex'
 };
 
-const center = {
-    lat: 53.3501,
-    lng: -6.2661
-  };
-
-
 const MapAllStops= ({ setSelectedStop }) => {
+  
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
   })
   console.log("All Stops:",stopsData)
 
+  const {
+    coords,
+    } = useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+    })
+
+    const center = {
+      lat: coords&&coords.latitude,
+      lng: coords&&coords.longitude
+    };
 
   // State to Mouseover a stop
   const [hoverStop, setHoverStop] = useState("");
@@ -47,7 +58,22 @@ const MapAllStops= ({ setSelectedStop }) => {
         zoom={14}  
       >
         { /* Child components, such as markers, info windows, etc. */ }
+        
+        {/* Displaying User or Device Position on Maps  */}
+        {coords&&
+          <Marker
+            position={{
+              lat: coords.latitude,
+              lng: coords.longitude
+            }}
+            icon={{
+              url: CurrentLocationIcon,
+              scaledSize: new window.google.maps.Size(50, 50)
+            }}  
+          />
+        }
 
+        {/* Dispaly all stops' markers */}
         {stopsData.RECORDS.map(stop => (
 
             <Marker
@@ -72,6 +98,7 @@ const MapAllStops= ({ setSelectedStop }) => {
                             
           ))}
 
+        {/*  DisplayI nfo windows  */}
         {hoverStop && 
           <InfoWindow
               onCloseClick={() => {
