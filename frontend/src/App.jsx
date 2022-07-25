@@ -3,7 +3,7 @@ import Planner from "./pages/Planner";
 import Stops from "./pages/Stops";
 import Lines from './pages/Lines';
 import Weather from './pages/Weather';
-import Favorites from "./pages/Favorites";
+import Account from "./pages/Account";
 import Feedback from "./pages/Feedback";
 import Explore from "./pages/Explore";
 
@@ -18,7 +18,7 @@ function App() {
         <Route path="/stops" element={<Stops />} />
         <Route path="/lines" element={<Lines />} />
         <Route path="/weather" element={<Weather />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/explore" element={<Explore />} />
         

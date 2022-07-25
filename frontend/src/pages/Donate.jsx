@@ -6,7 +6,7 @@ import {
   SwitchVerticalIcon,
   MenuAlt2Icon,
   CloudIcon,
-  HeartIcon,
+  UserIcon,
   MapIcon,
   XIcon,
 } from '@heroicons/react/outline'
@@ -23,11 +23,11 @@ import Stripe from '../Components/stripe'
 const sidebarNavigation = [
   { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
-  { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
-  { name: 'Explore', href: '#',  path:'/explore', icon: LocationMarkerIcon, current: false },
+  { name: 'Lines', href: '#', path:'/lines', icon: SwitchVerticalIcon, current: false },
+  { name: 'Explore', href: '#', path:'/explore', icon: LocationMarkerIcon, current: false },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
-  { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
-  // { name: 'Donate', href: '#',  path:'/donate', icon: BellIcon, current: true },
+  { name: 'Account', href: '#', path:'/account', icon: UserIcon, current: false },
+  // { name: 'Donate', href: '#', path:'/donate', icon: BellIcon, current: true },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
 

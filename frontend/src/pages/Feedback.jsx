@@ -6,7 +6,7 @@ import {
   SwitchVerticalIcon,
   MenuAlt2Icon,
   CloudIcon,
-  HeartIcon,
+  UserIcon,
   MapIcon,
   XIcon,
 } from '@heroicons/react/outline'
@@ -23,7 +23,7 @@ const sidebarNavigation = [
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   { name: 'Explore', href: '#',  path:'/explore', icon: LocationMarkerIcon, current: false },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
-  { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
+  { name: 'Account', href: '#', path:'/account', icon: UserIcon, current: false },
   // { name: 'Donate', href: '#',  path:'/donate', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: true },
 ]
