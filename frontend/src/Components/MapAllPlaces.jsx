@@ -4,7 +4,7 @@ import { useGeolocated } from "react-geolocated";
 import {Paper, Typography, useMediaQuery } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import CurrentLocationIcon from "../../src/data/current_location.png"
-import stopIcon from "../../src/data/location.png"
+import placeIcon from "../../src/data/place.png"
 
 const containerStyle = {
     width: '100%',
@@ -67,7 +67,7 @@ const MapAllPlaces = ({ setSelectedPlace, selectedPlace, coordinates, places}) =
             console.log("Selected Place:",place) 
           }}
           icon={{
-            url: stopIcon,
+            url: placeIcon,
             scaledSize: new window.google.maps.Size(35, 35)
           }}                     
         />
