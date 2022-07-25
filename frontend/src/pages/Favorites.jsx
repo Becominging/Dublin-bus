@@ -2,7 +2,7 @@ import { Fragment, useState} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   AnnotationIcon,
-  // BellIcon,
+  LocationMarkerIcon,
   SwitchVerticalIcon,
   MenuAlt2Icon,
   CloudIcon,
@@ -13,7 +13,7 @@ import {
 import { SearchIcon } from '@heroicons/react/solid'
 import MapAllStops from '../Components/MapAllStops'
 import { Link } from 'react-router-dom'
-
+import { useJsApiLoader } from '@react-google-maps/api';
 import HeaderLogo from '../Components/HeaderLogo'
 import PlannerContainer from '../Components/PlannerContainer'
 import Login from '../Components/Login'
@@ -24,9 +24,10 @@ const sidebarNavigation = [
   { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
+  { name: 'Explore', href: '#',  path:'/explore', icon: LocationMarkerIcon, current: false },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
-  { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current:  true},
-  // { name: 'Alert', href: '#',  path:'/alert', icon: BellIcon, current: false },
+  { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: true },
+  // { name: 'Donate', href: '#',  path:'/donate', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
 ]
 
@@ -42,7 +43,12 @@ function classNames(...classes) {
 export default function Planner() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  return (
+  const { isLoaded } = useJsApiLoader({  
+    libraries: ["places"],
+    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  })
+
+  return isLoaded ? (
     <>
       <div className="h-full flex dark:bg-black">
         {/* Narrow sidebar */}
@@ -291,5 +297,5 @@ export default function Planner() {
       </div>
       
     </>
-  )
+  ): <></>
 }

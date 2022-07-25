@@ -13,10 +13,10 @@ const containerStyle = {
 };
 
 const MapStop= ({ selectedStop }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
+  // const { isLoaded } = useJsApiLoader({
+  //   id: 'google-map-script',
+  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  // })
   
   const center = {
     lat: selectedStop['stop_lat'],
@@ -32,7 +32,7 @@ const MapStop= ({ selectedStop }) => {
       userDecisionTimeout: 5000,
     })
 
-  return isLoaded ? (  
+  return (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -72,7 +72,7 @@ const MapStop= ({ selectedStop }) => {
         />
                 
       </GoogleMap>
-  ) : <></>
+  ) 
 }
 
 export default React.memo(MapStop) 

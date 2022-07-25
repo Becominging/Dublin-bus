@@ -26,10 +26,10 @@ const options = {
 };
 
 const MapLine= ({ selectedLine }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
+  // const { isLoaded } = useJsApiLoader({
+  //   id: 'google-map-script',
+  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  // })
 
   const {
     coords,
@@ -64,7 +64,7 @@ const MapLine= ({ selectedLine }) => {
 
 }, [shape]);
  
-  return isLoaded ? (  
+  return (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -134,7 +134,7 @@ const MapLine= ({ selectedLine }) => {
           } 
          
       </GoogleMap>
-  ) : <></>
+  ) 
 }
 
 export default React.memo(MapLine) 

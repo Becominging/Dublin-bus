@@ -5,7 +5,7 @@ import Lines from './pages/Lines';
 import Weather from './pages/Weather';
 import Favorites from "./pages/Favorites";
 import Feedback from "./pages/Feedback";
-import Alert from "./pages/Alert";
+import Explore from "./pages/Explore";
 
 
 
@@ -20,7 +20,7 @@ function App() {
         <Route path="/weather" element={<Weather />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/feedback" element={<Feedback />} />
-        <Route path="/alert" element={<Alert />} />
+        <Route path="/explore" element={<Explore />} />
         
       </Routes>
     </BrowserRouter>

@@ -15,10 +15,10 @@ const containerStyle = {
 
 const MapAllStops= ({ setSelectedStop }) => {
   
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
+  // const { isLoaded } = useJsApiLoader({
+  //   id: 'google-map-script',
+  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  // })
   console.log("All Stops:",stopsData)
 
   const {
@@ -51,7 +51,7 @@ const MapAllStops= ({ setSelectedStop }) => {
   //       };
   //     }, []);
 
-  return isLoaded ? (  
+  return (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -102,7 +102,7 @@ const MapAllStops= ({ setSelectedStop }) => {
         {hoverStop && 
           <InfoWindow
               onCloseClick={() => {
-                hoverStop(null);
+                setHoverStop(null);
                 }}
               position={{
                 lat: hoverStop.stop_lat+0.00004,
@@ -116,7 +116,7 @@ const MapAllStops= ({ setSelectedStop }) => {
         }
           
       </GoogleMap>
-  ) : <></>
+  ) 
 }
 
 export default React.memo(MapAllStops) 

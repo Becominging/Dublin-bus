@@ -12,10 +12,10 @@ const containerStyle = {
 
 
 function Map() {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
+  // const { isLoaded } = useJsApiLoader({
+  //   id: 'google-map-script',
+  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  // })
 
   const {
     coords,
@@ -31,7 +31,7 @@ function Map() {
       lng: coords&&coords.longitude
     };
  
-  return isLoaded ? (  
+  return (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -43,8 +43,8 @@ function Map() {
         {coords&&
           <Marker
             position={{
-              lat: coords.latitude,
-              lng: coords.longitude
+              lat: Number(coords.latitude),
+              lng: Number(coords.longitude)
             }}
             icon={{
               url: CurrentLocationIcon,
@@ -54,7 +54,7 @@ function Map() {
         }
 
       </GoogleMap>
-  ) : <></>
+  )
 }
 
 export default React.memo(Map) 

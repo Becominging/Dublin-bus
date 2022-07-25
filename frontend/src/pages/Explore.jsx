@@ -11,19 +11,18 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import MapAllStops from '../Components/MapAllStops'
 import { Link } from 'react-router-dom'
 import { useJsApiLoader } from '@react-google-maps/api';
 import HeaderLogo from '../Components/HeaderLogo'
-import PlannerContainer from '../Components/PlannerContainer'
+import ExploreContainer from '../Components/ExploreContainer'
 
 
 
 const sidebarNavigation = [
-  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: true },
+  { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
   { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
-  { name: 'Explore', href: '#',  path:'/explore', icon: LocationMarkerIcon, current: false },
+  { name: 'Explore', href: '#',  path:'/explore', icon: LocationMarkerIcon, current: true },
   { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
   { name: 'Favorites', href: '#',   path:'/favorites', icon: HeartIcon, current: false },
   // { name: 'Donate', href: '#',  path:'/donate', icon: BellIcon, current: false },
@@ -38,7 +37,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Planner() {
+export default function Explore() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   
   const { isLoaded } = useJsApiLoader({  
@@ -261,20 +260,7 @@ export default function Planner() {
 
           {/* Main content */}
           <div className="flex items-stretch overflow-hidden">
-            
-            {/* Primary column */}
-            <main className="overflow-y-auto w-96">
-              <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
-                <PlannerContainer />
-              </section>
-            </main>
-
-            {/* Secondary column (hidden on smaller screens) */}
-            <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
-              <div className="flex w-full items-stretch overflow-hidden">
-                <MapAllStops />
-              </div>  
-            </aside>
+            <ExploreContainer />
           </div>
         
         </div>
@@ -284,3 +270,4 @@ export default function Planner() {
     </>
   ): <></>
 }
+
