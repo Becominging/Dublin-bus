@@ -1,5 +1,5 @@
 import { XIcon} from '@heroicons/react/outline'
-
+import { Pagination } from 'antd';
 import React, {useState, useEffect, createRef} from 'react';
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 
@@ -9,6 +9,15 @@ import PlaceDetails from './PlaceDetails'
 const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRating, childClicked, isLoading, selectedPlace, setSelectedPlace}) => {
   console.log("Places:",places)
   const [elRefs, setElRefs] = useState([]);
+  
+  // State for the pagination in the results
+  const [page, setPage] = useState(1)
+
+  // function that sets the results page with the new value
+  const onChange = (page) => {
+    setPage(page)
+    console.log(page)
+  }
 
   useEffect(() => {
     setElRefs((refs) => Array(places?.length).fill().map((_, i) => refs[i] || createRef()));
@@ -54,17 +63,25 @@ const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRat
                   </FormControl> 
                 </div>
 
-                {!selectedPlace&&<Grid container spacing={3}>
-                  {places?.map((place, i) => (
-                    <Grid ref={elRefs[i]} item key={i} xs={12}>
-                    <PlaceDetails
-                      selected={Number(childClicked) === i}
-                      refProp={elRefs[i]}
-                      place={place}
-                    />
-                    </Grid>
-                  ))}
-                </Grid>}
+                {!selectedPlace&&
+                  <Grid container spacing={3}>
+                    {places?.slice((page - 1) * 1, ((page - 1) * 1) + 1).map((place, i) => (
+                      <Grid ref={elRefs[i]} item key={i} xs={12}>
+                        <PlaceDetails
+                          selected={Number(childClicked) === i}
+                          refProp={elRefs[i]}
+                          place={place}
+                        />
+                      </Grid>
+                    ))}
+                    {/* Pagination to control the number of results displayed */}
+                    {places && <div className="flex place-content-center w-full items-center px-3 py-2">
+                      <Pagination current={page} onChange={onChange} showSizeChanger={false} showQuickJumper={false} pageSize={1} total={Math.ceil(places.length)}/>
+                    </div>}
+                  </Grid>
+                }
+                    
+
                 {selectedPlace&&<Grid container spacing={3}>
                   
                     <Grid ref={elRefs[0]} item key={0} xs={12}>
