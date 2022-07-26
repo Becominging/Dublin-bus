@@ -88,14 +88,17 @@ const MapAllPlaces = ({ setSelectedPlace, selectedPlace, coordinates, places}) =
               >
               
               <Paper >
-              <Typography  variant='subtitle2' gutterBottom>
-                {hoverPlace.name}
-              </Typography>
-              <img className="w-full h-10 object-center object-cover"    
-                src={hoverPlace.photo ? hoverPlace.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
-                alt={hoverPlace.name}   
-              />
-              <Rating size="small" value={Number(hoverPlace.rating)} readOnly/>
+                <img className="w-full h-10 object-center object-cover"    
+                  src={hoverPlace.photo ? hoverPlace.photo.images.large.url : 'https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg'}
+                  alt={hoverPlace.name}   
+                />
+                <Typography  variant='subtitle2'>
+                  {hoverPlace.name}
+                </Typography>
+                <div className="flex items-start">
+                  <Rating size="small" value={Number(hoverPlace.rating)} readOnly precision={0.5}/>
+                  <Typography variant="caption" className="pt-0.5 pl-3">{hoverPlace.num_reviews} review{hoverPlace.num_reviews > 1 && 's'}</Typography>
+                </div>
             </Paper>   
                 
           </InfoWindow>
