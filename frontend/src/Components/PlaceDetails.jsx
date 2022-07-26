@@ -1,10 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core';
-// import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { PhoneIcon, LocationMarkerIcon } from '@heroicons/react/outline'
-
+import { PhoneIcon } from '@heroicons/react/outline'
 import Rating from '@material-ui/lab/Rating';
-
 
 
 const PlaceDetails = ({place, selected, refProp}) => {
@@ -20,20 +17,12 @@ const PlaceDetails = ({place, selected, refProp}) => {
     <CardContent>
       <Typography variant="h6" className="pl-1">{place.name}</Typography>
       <Box display="flex" justifyContent="space-between" my={2} className="flex items-start">
-        <Rating name="read-only" value={Number(place.rating)} readOnly/>
-        <Typography component="legend" gutterBottom variant="caption" className="pt-1 pl-3">{place.num_reviews} review{place.num_reviews > 1 && 's'}</Typography>
+        <Rating name="read-only" value={Number(place.rating)} readOnly precision={0.5} size="small"/>
+        <Typography component="legend" gutterBottom variant="caption" className="pt-0.5 pl-4">{place.num_reviews} review{place.num_reviews > 1 && 's'}</Typography>
+        <Typography variant="caption" className="pt-0.5 px-3">{place.price_level}</Typography>
       </Box>
-      <Box display="flex" justifyContent="space-between" className="flex items-start">
-        <Typography component="legend" variant="body2">Price</Typography>
-        <Typography variant="body2">
-          {place.price_level}
-        </Typography>
-      </Box>
-      <Box display="flex" justifyContent="space-between" className="flex items-start">
-        <Typography component="legend" variant="body2">Ranking</Typography>
-        <Typography gutterBottom variant="body2">
-          {place.ranking}
-        </Typography>
+      <Box display="flex" justifyContent="space-between">
+        <Typography gutterBottom variant="body2">{place.ranking}</Typography>
       </Box>
       {place?.awards?.map((award) => (
         <Box display="flex" justifyContent="space-between" my={1} alignItems="center" className="flex items-start">
@@ -55,13 +44,15 @@ const PlaceDetails = ({place, selected, refProp}) => {
         </Typography>
       )}
     </CardContent>
+    
     <CardActions>
+    <div className="flex items-end">
       <Button size="small" variant="text" color="secondary" onClick={() => window.open(place.web_url, '_blank')}>
         Trip Advisor
       </Button>
-      <Button size="small" variant="text" color="secondary" onClick={() => window.open(place.website, '_blank')}>
+     <Button size="small" variant="text" color="secondary" onClick={() => window.open(place.website, '_blank')}>
         Website
-      </Button>
+      </Button></div>
     </CardActions>
   </Card>
   );

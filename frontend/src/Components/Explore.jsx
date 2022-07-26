@@ -1,9 +1,10 @@
 import { XIcon} from '@heroicons/react/outline'
 import { Pagination } from 'antd';
 import React, {useState, useEffect, createRef} from 'react';
-import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
-
+import { CircularProgress, Grid } from '@material-ui/core';
 import PlaceDetails from './PlaceDetails'
+import SelectListType from './SelectListType';
+import SelectListRating from './SelectListRating';
 
 
 const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRating, childClicked, isLoading, selectedPlace, setSelectedPlace}) => {
@@ -42,25 +43,18 @@ const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRat
               </div>
             ) : (
               <>
-                <div className="max-w-sm mx-auto w-full space-y-5 p-2">
-                  <FormControl className="max-w-sm mx-auto w-full space-y-5 p-2">
-                    <InputLabel>Type</InputLabel>
-                      <Select value={type} onChange={(e) => setType(e.target.value)}>
-                        <MenuItem value="restaurants">Restaurants</MenuItem>
-                        <MenuItem value="hotels">Hotels</MenuItem>
-                        <MenuItem value="attractions">Attractions</MenuItem>
-                      </Select>
-                  </FormControl>
+                <div className="max-w-sm mx-auto w-full space-y-5 px-2 pt-2 pb-6">
+                  
+                  <SelectListType
+                    type={type}
+                    setType={setType}
+                  />
               
-                  <FormControl className="max-w-sm mx-auto w-full space-y-5 p-2">
-                    <InputLabel>Rating</InputLabel>
-                      <Select value={rating} onChange={(e) => setRating(e.target.value)}>
-                        <MenuItem value={0}>All</MenuItem>
-                        <MenuItem value={3}>Above 3.0</MenuItem>
-                        <MenuItem value={4}>Above 4.0</MenuItem>
-                        <MenuItem value={4.5}>Above 4.5</MenuItem>
-                      </Select>
-                  </FormControl> 
+                  <SelectListRating
+                    rating={rating}
+                    setRating={setRating}
+                  />
+                  
                 </div>
 
                 {!selectedPlace&&

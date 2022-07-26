@@ -14,7 +14,6 @@ const containerStyle = {
   };
 
 
-
 const MapAllPlaces = ({ setSelectedPlace, selectedPlace, coordinates, places}) => {
 
   console.log("Map Center:",coordinates)
