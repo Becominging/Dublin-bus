@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from dbus.models import Stop, Shape, Trip, StopTime, Route, Calendar
 from dbus.serializers import StopModelSerializer
 import requests
-
+from joblib import load
 
 
 class StopViewSet(ModelViewSet):
@@ -184,3 +184,52 @@ def Lines(request):
         result[i]['stops'] = list(StopTime.objects.filter(trip_id=record['trip_id']).values("arrival_time","departure_time","stop_sequence","stop_headsign","shape_dist_traveled","stop_id",stop_name=F("stop__stop_name"),stop_number=F("stop__stop_number"),stop_lat=F("stop__stop_lat"),stop_lon=F("stop__stop_lon")))
 
     return JsonResponse(list(result), safe=False)
+
+
+def Predict(request, route, direction, stopA, stopA_sequence, time, day, month, stopB, stopB_sequence):
+
+    # make sure parameters are of right type
+    route = str(route.upper())
+    direction = int(direction)
+    stopA = str(stopA)
+    stopA_sequence = int(stopA_sequence)
+    time = int(time)
+    day = int(day)
+    month = int(month)
+    stopB = str(stopB)
+    stopB_sequence = int(stopB_sequence)
+
+    # call pickle file (pickle files were named wrong the file is called d1 for direction 0, and d2 for direction 1)
+    pickleFile = 'Pickles/' + route + '_d' + str(direction + 1) + '_model.pkl'
+
+    # load the pickle file
+    pk = load(pickleFile)
+
+    # allocate values to dummy features based on user input
+    days = [0, 0, 0, 0, 0, 0]
+    months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    days[day - 1] = 0 if (day == 0) else 1
+    months[month - 1] = 0 if (month == 0) else 1
+    print(days)
+    print(months)
+
+    # add parameters with dummy values to get full list of parameters
+    paramsA = [stopA_sequence, stopA, time] + days + months
+    paramsB = [stopB_sequence, stopB, time] + days + months
+    print(paramsA)
+    print(paramsB)
+
+    # make a prediction and convert to a list
+    predictA = pk.predict([paramsA])
+    predict_listA = predictA.tolist()
+    predictB = pk.predict([paramsB])
+    predict_listB = predictB.tolist()
+    prediction = predict_listB[0] - predict_listA[0]
+    print(prediction)
+
+    response = {
+        'JourneyDuration': prediction
+    }
+
+    print(response)
+    return JsonResponse(response, safe=False)
