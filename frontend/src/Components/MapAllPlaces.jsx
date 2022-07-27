@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { GoogleMap, Marker, InfoWindow} from '@react-google-maps/api';
-import { useGeolocated } from "react-geolocated";
-import {Paper, Typography, useMediaQuery } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
+import React, { useState } from "react"
+import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api'
+import { useGeolocated } from "react-geolocated"
+import {Paper, Typography } from '@material-ui/core'
+import Rating from '@material-ui/lab/Rating'
 import CurrentLocationIcon from "../../src/data/current_location.png"
 import placeIcon from "../../src/data/place.png"
 
@@ -17,7 +17,12 @@ const containerStyle = {
 const MapAllPlaces = ({ setSelectedPlace, selectedPlace, coordinates, places}) => {
 
   console.log("Map Center:",coordinates)
-  
+
+  const { isLoaded } = useJsApiLoader({  
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  })
+
   const {
     coords,
     } = useGeolocated({
@@ -31,7 +36,7 @@ const MapAllPlaces = ({ setSelectedPlace, selectedPlace, coordinates, places}) =
   // State to Mouseover a stop
   const [hoverPlace, setHoverPlace] = useState("");
 
-  return (
+  return isLoaded ? (
       
       <GoogleMap 
         mapContainerStyle={containerStyle}
@@ -105,10 +110,7 @@ const MapAllPlaces = ({ setSelectedPlace, selectedPlace, coordinates, places}) =
         }
         
       </GoogleMap>
-
-    
-  
-  );
-};
+  ) : <></>
+}
 
 export default React.memo(MapAllPlaces) 

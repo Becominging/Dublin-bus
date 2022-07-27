@@ -1,6 +1,6 @@
-import React from "react";
-import { GoogleMap, useJsApiLoader, Marker} from '@react-google-maps/api';
-import { useGeolocated } from "react-geolocated";
+import React from "react"
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
+import { useGeolocated } from "react-geolocated"
 import stopIcon from "../../src/data/location.png"
 import CurrentLocationIcon from "../../src/data/current_location.png"
 
@@ -13,10 +13,10 @@ const containerStyle = {
 };
 
 const MapStop= ({ selectedStop }) => {
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  // })
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  })
   
   const center = {
     lat: selectedStop['stop_lat'],
@@ -32,7 +32,7 @@ const MapStop= ({ selectedStop }) => {
       userDecisionTimeout: 5000,
     })
 
-  return (  
+  return isLoaded ? (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -56,7 +56,7 @@ const MapStop= ({ selectedStop }) => {
         }
         
         
-        <Marker
+        {selectedStop&&<Marker
           position={{
             lat: selectedStop['stop_lat'],
             lng: selectedStop['stop_lon']
@@ -69,10 +69,10 @@ const MapStop= ({ selectedStop }) => {
             url: stopIcon,
             scaledSize: new window.google.maps.Size(40, 40)
           }}
-        />
+        />}
                 
       </GoogleMap>
-  ) 
+  ) : <></>
 }
 
 export default React.memo(MapStop) 

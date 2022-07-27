@@ -12,10 +12,8 @@ import {
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom'
-import { useJsApiLoader } from '@react-google-maps/api';
 import HeaderLogo from '../Components/HeaderLogo'
 import ExploreContainer from '../Components/ExploreContainer'
-
 
 
 const sidebarNavigation = [
@@ -40,12 +38,9 @@ function classNames(...classes) {
 export default function Explore() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   
-  const { isLoaded } = useJsApiLoader({  
-    libraries: ["places"],
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
+  
 
-  return isLoaded ? (
+  return (
     <>
       <div className="h-full flex">
         {/* Narrow sidebar */}
@@ -268,6 +263,6 @@ export default function Explore() {
       </div>
       
     </>
-  ): <></>
+  )
 }
 

@@ -11,7 +11,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import Map from '../Components/Map'
+import MapAllStops from '../Components/MapAllStops'
 import { Link } from 'react-router-dom'
 import { useJsApiLoader } from '@react-google-maps/api';
 import HeaderLogo from '../Components/HeaderLogo'
@@ -43,12 +43,12 @@ function classNames(...classes) {
 export default function Donate() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const { isLoaded } = useJsApiLoader({  
-    libraries: ["places"],
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
+  // const { isLoaded } = useJsApiLoader({  
+  //   libraries: ["places"],
+  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  // })
 
-  return isLoaded ? (
+  return (
     <>
       <div className="h-full flex">
         {/* Narrow sidebar */}
@@ -274,7 +274,7 @@ export default function Donate() {
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
               <div className="flex w-full items-stretch overflow-hidden">
-                <Map />
+                <MapAllStops />
               </div>  
             </aside>
           </div>
@@ -284,5 +284,5 @@ export default function Donate() {
       </div>
       
     </>
-  ): <></>
+  )
 }

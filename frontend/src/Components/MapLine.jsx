@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { GoogleMap, useJsApiLoader, Marker, Polyline, InfoWindow} from '@react-google-maps/api';
-import { useGeolocated } from "react-geolocated";
-import useFetch from "./useFetch.js";
+import React, { useState, useEffect } from "react"
+import { GoogleMap, Marker, Polyline, InfoWindow, useJsApiLoader} from '@react-google-maps/api'
+import { useGeolocated } from "react-geolocated"
+import useFetch from "./useFetch.js"
 import stopIcon from "../../src/data/bus_stop.png"
 import CurrentLocationIcon from "../../src/data/current_location.png"
 
@@ -26,10 +26,10 @@ const options = {
 };
 
 const MapLine= ({ selectedLine }) => {
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  // })
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  })
 
   const {
     coords,
@@ -51,6 +51,7 @@ const MapLine= ({ selectedLine }) => {
   console.log("Trip ID for Makers:",selectedLine['trip_id'])
   console.log("Shape for Makers:",shape)
   console.log("Stops for Makers:",stops)
+  console.log("Path:",path)
 
   // Get the line path
   useEffect(() => {
@@ -64,7 +65,7 @@ const MapLine= ({ selectedLine }) => {
 
 }, [shape]);
  
-  return (  
+  return isLoaded ? (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -87,12 +88,12 @@ const MapLine= ({ selectedLine }) => {
           }
 
           {/* Display the line path*/}
-          <Polyline
+          {shape&&<Polyline
             options={options}
             path={path}
             // onLoad={centerMap}
-          />
-
+          />}
+          
           {/* Display the stops in that line */}
           {stops&&stops.map((stop) => {
             return(
@@ -134,7 +135,7 @@ const MapLine= ({ selectedLine }) => {
           } 
          
       </GoogleMap>
-  ) 
+  ) : <></>
 }
 
-export default React.memo(MapLine) 
+export default React.memo(MapLine)

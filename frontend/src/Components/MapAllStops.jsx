@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow} from '@react-google-maps/api';
-import { useGeolocated } from "react-geolocated";
-import stopsData from "../data/stops.json";
+import { useGeolocated } from "react-geolocated"
+import stopsData from "../data/stops.json"
 import stopIcon from "../../src/data/bus_stop.png"
 import CurrentLocationIcon from "../../src/data/current_location.png"
 
@@ -15,10 +15,10 @@ const containerStyle = {
 
 const MapAllStops= ({ setSelectedStop }) => {
   
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  // })
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  })
   console.log("All Stops:",stopsData)
 
   const {
@@ -51,7 +51,7 @@ const MapAllStops= ({ setSelectedStop }) => {
   //       };
   //     }, []);
 
-  return (  
+  return isLoaded ? (  
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -116,7 +116,7 @@ const MapAllStops= ({ setSelectedStop }) => {
         }
           
       </GoogleMap>
-  ) 
+  ) : <></>
 }
 
 export default React.memo(MapAllStops) 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import useFetch from "./useFetch.js";
 import Lines from '../Components/Lines'
 import MapLine from './MapLine'
-import Map from './Map';
+import MapAllStops from './MapAllStops';
 
 function LinesContainer() {
 
@@ -24,7 +24,7 @@ function LinesContainer() {
      {/* Secondary column (hidden on smaller screens) */}
      <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
        <div className="flex w-full items-stretch overflow-hidden">
-         {!selectedLine&&<Map/>}  
+         {!selectedLine&&<MapAllStops/>}  
          {selectedLine&&<MapLine selectedLine={selectedLine}/>}
        </div>  
      </aside>

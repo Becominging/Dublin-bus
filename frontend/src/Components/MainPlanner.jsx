@@ -1,12 +1,11 @@
-import { useEffect, Fragment, useState} from "react";
+import { useEffect, useState} from "react";
 import { CheckCircleIcon, SwitchHorizontalIcon, RefreshIcon} from '@heroicons/react/outline'
-import SelectStops from './SelectStops'
+import { SearchIcon } from '@heroicons/react/solid'
 import ComboboxStops from './ComboboxStops'
 import PickTime from './PickTime'
-import SearchButton from "./SearchButton";
+import Results from "./Results"
 
-// This is a subcomponent from the planner search system.
-// Allows the user to enter the Origin stop and the Destination stop
+
 const MainPlanner = ({ selectedLine, setSelectedLine }) => {
   // States for the different fields the user has to enter 
   const [origin, setOrigin] = useState();
@@ -15,8 +14,10 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
   // State for the stops passed to the search bars
   const [validOriginStops, setValidOriginStops] = useState(selectedLine.stops);
   const [validDestinationStops, setValidDestinationStops] = useState(selectedLine.stops);
-    // State that when true the search can be performed
-const [searchAvailable, setSearchAvailable] = useState(false);
+   // State that when true the search can be performed
+  const [searchAvailable, setSearchAvailable] = useState(false);  
+  // State to display the results 
+  const [predict, setPredict] = useState(null);
 
   // Only allow the search if the user has entered origin and destination
   useEffect(() => {
@@ -38,7 +39,6 @@ const [searchAvailable, setSearchAvailable] = useState(false);
         return false;
       }));
     }
-    // eslint-disable-next-line
   }, [destination]);
 
   useEffect(() => {
@@ -50,12 +50,20 @@ const [searchAvailable, setSearchAvailable] = useState(false);
         return false;
       }));
     }
-    // eslint-disable-next-line
   }, [origin]);
+    
 
-  console.log("Set Origin:",origin)
-  console.log("Set Destination:",destination)
+  // console.log("Set Origin:",origin)
+  // console.log("Set Destination:",destination)
   console.log("Set Selected Time:",selectedTime)
+  // console.log("Selected Hours:",moment(selectedTime).hour())
+  // console.log("Selected Minutes:",moment(selectedTime).minute())
+  // console.log("Selected Seconds:",moment(selectedTime).second())
+  // console.log("Selected Time without Date:",moment(selectedTime).hour()*60*60+moment(selectedTime).minute()*60+moment(selectedTime).second())
+  // console.log("Selected Date:",moment(selectedTime).date())
+  // console.log("Selected Day:",moment(selectedTime).day())
+  // console.log("Selected Month:",moment(selectedTime).month())
+  // console.log("Prediction Results:",predictionResults)
 
   return (
     <>
@@ -141,7 +149,21 @@ const [searchAvailable, setSearchAvailable] = useState(false);
           </div>
         </div>
 
-        <div className="p-2"><SearchButton/></div>
+        {/* Display the results from the search */}
+        {predict && <Results selectedLine={selectedLine} origin={origin} destination={destination} selectedTime={selectedTime} />}            
+        {/* <TestuseFetch /> */}
+        {/* Search Button */}            
+        {searchAvailable && <div className="p-2">
+          {/* <SearchButton onClick={() => handleSearch()}/> */}
+          <button
+            type="button"
+            className="flex place-content-center w-full items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400"
+            onClick={() => handleSearch()}        
+          >
+            <SearchIcon className="-ml-0.5 mr-2 h-4 " aria-hidden="true" />
+            Search
+          </button>          
+        </div>}
         
     </div>
     </div>
@@ -154,6 +176,12 @@ const [searchAvailable, setSearchAvailable] = useState(false);
     setOrigin(null);
     setDestination(null);
   }
+
+  // Function to handle search
+  function handleSearch() {
+    setPredict(true)
+  }
+
 }
 
 export default MainPlanner;

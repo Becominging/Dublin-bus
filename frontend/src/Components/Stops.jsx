@@ -2,7 +2,7 @@ import { RefreshIcon} from '@heroicons/react/outline'
 import ComboboxStops from './ComboboxStops'
 import BusArrivalInfo from './BusArrivalInfo'
 
-const Stops= ({ stops, selectedStop, setSelectedStop }) => {  
+const Stops = ({ stops, selectedStop, setSelectedStop }) => {  
 
 
   return (

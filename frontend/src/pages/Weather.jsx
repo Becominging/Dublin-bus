@@ -42,12 +42,12 @@ function classNames(...classes) {
 export default function Planner() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   
-  const { isLoaded } = useJsApiLoader({  
-    libraries: ["places"],
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
+  // const { isLoaded } = useJsApiLoader({  
+  //   libraries: ["places"],
+  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
+  // })
 
-  return isLoaded ? (
+  return (
     <>
       <div className="h-full flex">
         {/* Narrow sidebar */}
@@ -286,5 +286,5 @@ export default function Planner() {
       </div>
       
     </>
-  ): <></>
+  )
 }

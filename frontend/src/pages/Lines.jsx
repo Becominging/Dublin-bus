@@ -11,9 +11,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import MapAllStops from '../Components/MapAllStops'
 import { Link } from 'react-router-dom'
-import { useJsApiLoader } from '@react-google-maps/api';
 import HeaderLogo from '../Components/HeaderLogo'
 
 import LinesContainer from '../Components/LinesContainer'
@@ -43,12 +41,7 @@ function classNames(...classes) {
 export default function Planner() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const { isLoaded } = useJsApiLoader({  
-    libraries: ["places"],
-    googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  })
-
-  return isLoaded ? (
+  return (
     <>
       <div className="h-full flex">
         {/* Narrow sidebar */}
@@ -272,5 +265,5 @@ export default function Planner() {
       </div>
       
     </>
-  ): <></>
+  )
 }
