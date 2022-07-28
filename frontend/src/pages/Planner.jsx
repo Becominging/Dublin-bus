@@ -261,21 +261,25 @@ export default function Planner() {
 
           {/* Main content */}
           <div className="flex items-stretch overflow-hidden">
-            
+            <PlannerContainer />
+          </div>
+
+
+          {/* <div className="flex items-stretch overflow-hidden"> */}
             {/* Primary column */}
-            <main className="overflow-y-auto w-96">
+            {/* <main className="overflow-y-auto w-96">
               <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
                 <PlannerContainer />
               </section>
-            </main>
+            </main> */}
 
             {/* Secondary column (hidden on smaller screens) */}
-            <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
+            {/* <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
               <div className="flex w-full items-stretch overflow-hidden">
                 <MapAllStops />
               </div>  
             </aside>
-          </div>
+          </div> */}
         
         </div>
         

@@ -25,7 +25,7 @@ const options = {
   strokeWeight: 5
 };
 
-const MapLine= ({ selectedLine }) => {
+const MapLine = ({ selectedLine, origin, destination }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
@@ -48,10 +48,12 @@ const MapLine= ({ selectedLine }) => {
   // Get the data from the backend
   const {data: shape, loading:loading_shape, error:error_shape} = useFetch("http://127.0.0.1:8000/shape_of_trip/"+ selectedLine['trip_id']+'/')
   const { data: stops, loading:loading_stops, error:error_stops } = useFetch("http://127.0.0.1:8000/stops_in_trip/"+ selectedLine['trip_id']+'/')
-  console.log("Trip ID for Makers:",selectedLine['trip_id'])
-  console.log("Shape for Makers:",shape)
-  console.log("Stops for Makers:",stops)
-  console.log("Path:",path)
+//   console.log("Trip ID for Makers:",selectedLine['trip_id'])
+//   console.log("Shape for Makers:",shape)
+//   console.log("Stops for Makers:",stops)
+//   console.log("Path:",path)
+//   console.log("Origin:",origin)
+
 
   // Get the line path
   useEffect(() => {
@@ -88,7 +90,7 @@ const MapLine= ({ selectedLine }) => {
           }
 
           {/* Display the line path*/}
-          {shape&&<Polyline
+          {<Polyline
             options={options}
             path={path}
             // onLoad={centerMap}
@@ -118,10 +120,55 @@ const MapLine= ({ selectedLine }) => {
             )
           })}
 
+
+          {/* Display the origin stop in that line */}
+          {origin&&
+            <Marker
+              position={{
+                lat: origin['stop_lat'],
+                lng: origin['stop_lon']
+              }}
+              onMouseOver={() => {
+                setHoverStop(origin);
+                console.log("Hover Stop:",origin) 
+              }}
+              onClick={() => {
+                // setSelectedStop(stop);
+                console.log("Selected stop:",origin) 
+              }}
+              icon={{
+                url: stopIcon,
+                scaledSize: new window.google.maps.Size(30, 30)
+              }}
+            />
+          } 
+
+          {/* Display the destination stop in that line */}
+          {destination&&
+            <Marker
+              position={{
+                lat: destination['stop_lat'],
+                lng: destination['stop_lon']
+              }}
+              onMouseOver={() => {
+                setHoverStop(destination);
+                console.log("Hover Stop:",destination) 
+              }}
+              onClick={() => {
+                // setSelectedStop(stop);
+                console.log("Selected stop:",destination) 
+              }}
+              icon={{
+                url: stopIcon,
+                scaledSize: new window.google.maps.Size(30, 30)
+              }}
+            />
+          } 
+
           {hoverStop && 
             <InfoWindow
               onCloseClick={() => {
-                hoverStop(null);
+                setHoverStop(null);
                 }}
               position={{
                 lat: hoverStop.stop_lat+0.00004,

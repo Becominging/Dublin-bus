@@ -32,13 +32,15 @@ const MapAllPlaces = ({ setSelectedPlace, selectedPlace, coordinates, places}) =
       userDecisionTimeout: 5000,
     })
   
+  const lat = coords&&coords.latitude
+  const lng = coords&&coords.longitude  
   
   // State to Mouseover a stop
   const [hoverPlace, setHoverPlace] = useState("");
 
   return isLoaded ? (
       
-      <GoogleMap 
+    <GoogleMap 
         mapContainerStyle={containerStyle}
         zoom={14}
         center={coordinates}

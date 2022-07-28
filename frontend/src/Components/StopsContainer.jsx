@@ -1,16 +1,24 @@
 import React from 'react'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useFetch from "./useFetch.js";
 import MapAllStops from './MapAllStops';
 import Stops from './Stops.jsx';
 import MapStop from './MapStop.jsx';
 
 function StopsContainer() {
+  const [coordinates, setCoorodinates] = useState({});
+  
   // State to select a stop
   const [selectedStop, setSelectedStop] = useState("");
 
   // Get the data from backend
   const { data: stops, loading, error } = useFetch("http://127.0.0.1:8000/stops/");
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(( {coords: {latitude, longitude}}) => {
+        setCoorodinates({lat: latitude, lng: longitude});
+    })
+},[]);
 
   return (
     <>        
@@ -24,8 +32,8 @@ function StopsContainer() {
      {/* Secondary column (hidden on smaller screens) */}
      <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
        <div className="flex w-full items-stretch overflow-hidden">
-         {!selectedStop&&<MapAllStops setSelectedStop={setSelectedStop}/>}  
-         {selectedStop&&<MapStop selectedStop={selectedStop}/>}
+         <MapAllStops coordinates={coordinates} selectedStop={selectedStop} setSelectedStop={setSelectedStop}/>
+         {/* {selectedStop&&<MapStop selectedStop={selectedStop}/>} */}
        </div>  
      </aside>
      

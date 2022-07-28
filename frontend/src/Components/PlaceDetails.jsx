@@ -4,8 +4,8 @@ import { PhoneIcon } from '@heroicons/react/outline'
 import Rating from '@material-ui/lab/Rating';
 
 
-const PlaceDetails = ({place, selected, refProp}) => {
-  if(selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+const PlaceDetails = ({ refProp, place }) => {
+  refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   return (
     <Card elevation={6} className="overflow-y-auto w-full">

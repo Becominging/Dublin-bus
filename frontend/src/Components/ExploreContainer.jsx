@@ -10,12 +10,9 @@ function ExploreContainer() {
     const [places, setPlaces] = useState([]);
     const [filteredPlaces, setFilteredPlaces] = useState([]);
     const [coordinates, setCoorodinates] = useState({});
-    const [bounds, setBounds] = useState({});
-    const [childClicked, setChildClicked] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState(0);
-    const [autocomplete, setAutocomplete] = useState(null);
     // State to select a place
     const [selectedPlace, setSelectedPlace] = useState("");
 
@@ -40,15 +37,7 @@ function ExploreContainer() {
             setFilteredPlaces([]);
             setIsLoading(false);
         });  
-    }, [type, coordinates, bounds]);
-
-
-    const onLoad = (autoC) => setAutocomplete(autoC);
-    const onPlaceChanged = () => {
-      const lat = autocomplete.getPlace().geometry.location.lat();
-      const lng = autocomplete.getPlace().geometry.location.lng();
-      setCoorodinates({ lat, lng });
-    };
+    }, [type, coordinates]);
 
 
   return (
@@ -57,10 +46,7 @@ function ExploreContainer() {
      <main className="overflow-y-auto w-96">
        <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
        <Explore 
-        onPlaceChanged={onPlaceChanged} 
-        onLoad={onLoad}
         places={filteredPlaces.length ? filteredPlaces : places}
-        childClicked={childClicked}
         isLoading={isLoading}
         type={type}
         setType={setType}
@@ -88,13 +74,6 @@ function ExploreContainer() {
    
    </>
   )
-
-  // Function to clean the search
-  function cleanSelect() {
-    setSelectedPlace(null);
-    console.log("cleanSelect")
-  }
-
 }
 
 export default ExploreContainer

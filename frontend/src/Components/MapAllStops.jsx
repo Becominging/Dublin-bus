@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow} from '@react-google-maps/api';
 import { useGeolocated } from "react-geolocated"
 import stopsData from "../data/stops.json"
@@ -13,7 +13,7 @@ const containerStyle = {
   display: 'flex'
 };
 
-const MapAllStops= ({ setSelectedStop }) => {
+const MapAllStops= ({ coordinates, selectedStop, setSelectedStop }) => {
   
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -30,31 +30,14 @@ const MapAllStops= ({ setSelectedStop }) => {
       userDecisionTimeout: 5000,
     })
 
-    const center = {
-      lat: coords&&coords.latitude,
-      lng: coords&&coords.longitude
-    };
-
+    
   // State to Mouseover a stop
-  const [hoverStop, setHoverStop] = useState("");
-  
-  // useEffect(() => {
-  //       const listener = e => {
-  //         if (e.key === "Escape") {
-  //           setSelectedStop(null);
-  //         }
-  //       };
-  //       window.addEventListener("keydown", listener);
-
-  //       return () => {
-  //         window.removeEventListener("keydown", listener);
-  //       };
-  //     }, []);
+  const [hoverStop, setHoverStop] = useState("")
 
   return isLoaded ? (  
-      <GoogleMap
+    <GoogleMap
         mapContainerStyle={containerStyle}
-        center={center}
+        center={ coordinates }
         zoom={14}  
       >
         { /* Child components, such as markers, info windows, etc. */ }
@@ -75,7 +58,6 @@ const MapAllStops= ({ setSelectedStop }) => {
 
         {/* Dispaly all stops' markers */}
         {stopsData.RECORDS.map(stop => (
-
             <Marker
               key={stop.stop_id}
               position={{
@@ -93,12 +75,33 @@ const MapAllStops= ({ setSelectedStop }) => {
               icon={{
                 url: stopIcon,
                 scaledSize: new window.google.maps.Size(15, 15)
-              }}                     
-            />
-                            
+              }}                
+            />                  
           ))}
 
-        {/*  DisplayI nfo windows  */}
+        {/* Display the selected stop in that line */}
+        {selectedStop&&
+            <Marker
+              position={{
+                lat: selectedStop['stop_lat'],
+                lng: selectedStop['stop_lon']
+              }}
+              onMouseOver={() => {
+                setHoverStop(selectedStop);
+                console.log("Hover Stop:",selectedStop) 
+              }}
+              onClick={() => {
+                setSelectedStop(selectedStop);
+                console.log("Selected stop:",selectedStop) 
+              }}
+              icon={{
+                url: stopIcon,
+                scaledSize: new window.google.maps.Size(30, 30)
+              }}
+            />
+          }      
+
+        {/*  Display Info windows  */}
         {hoverStop && 
           <InfoWindow
               onCloseClick={() => {

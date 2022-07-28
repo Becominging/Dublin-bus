@@ -6,10 +6,8 @@ import PickTime from './PickTime'
 import Results from "./Results"
 
 
-const MainPlanner = ({ selectedLine, setSelectedLine }) => {
-  // States for the different fields the user has to enter 
-  const [origin, setOrigin] = useState();
-  const [destination, setDestination] = useState();
+const MainPlanner = ({ selectedLine, setSelectedLine, origin, setOrigin, destination, setDestination }) => {
+  
   const [selectedTime, setSelectedTime] = useState(new Date());
   // State for the stops passed to the search bars
   const [validOriginStops, setValidOriginStops] = useState(selectedLine.stops);
@@ -150,8 +148,10 @@ const MainPlanner = ({ selectedLine, setSelectedLine }) => {
         </div>
 
         {/* Display the results from the search */}
-        {predict && <Results selectedLine={selectedLine} origin={origin} destination={destination} selectedTime={selectedTime} />}            
-        {/* <TestuseFetch /> */}
+        {predict && selectedLine && origin && destination && selectedTime &&
+          <Results selectedLine={selectedLine} origin={origin} destination={destination} selectedTime={selectedTime} />
+        }            
+        
         {/* Search Button */}            
         {searchAvailable && <div className="p-2">
           {/* <SearchButton onClick={() => handleSearch()}/> */}

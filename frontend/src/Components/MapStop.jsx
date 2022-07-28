@@ -1,5 +1,5 @@
-import React from "react"
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
+import React, { useState } from "react";
+import { GoogleMap, Marker, InfoWindow, useJsApiLoader } from '@react-google-maps/api'
 import { useGeolocated } from "react-geolocated"
 import stopIcon from "../../src/data/location.png"
 import CurrentLocationIcon from "../../src/data/current_location.png"
@@ -32,6 +32,9 @@ const MapStop= ({ selectedStop }) => {
       userDecisionTimeout: 5000,
     })
 
+  // State to Mouseover a stop
+  const [hoverStop, setHoverStop] = useState("")
+
   return isLoaded ? (  
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -61,6 +64,10 @@ const MapStop= ({ selectedStop }) => {
             lat: selectedStop['stop_lat'],
             lng: selectedStop['stop_lon']
           }}
+          onMouseOver={() => {
+            setHoverStop(selectedStop);
+            console.log("Hover Stop:",selectedStop) 
+          }}
           onClick={() => {
             // setSelectedStop(stop);
             console.log("Selected stop:",selectedStop) 
@@ -70,7 +77,24 @@ const MapStop= ({ selectedStop }) => {
             scaledSize: new window.google.maps.Size(40, 40)
           }}
         />}
-                
+
+        {/*  Display Info windows  */}
+        {hoverStop && 
+          <InfoWindow
+              onCloseClick={() => {
+                setHoverStop(null);
+                }}
+              position={{
+                lat: hoverStop.stop_lat+0.00004,
+                lng: hoverStop.stop_lon
+              }}
+              >
+              <div>
+                <h2>{hoverStop['stop_name']}</h2>
+                </div>
+          </InfoWindow>
+        }
+
       </GoogleMap>
   ) : <></>
 }

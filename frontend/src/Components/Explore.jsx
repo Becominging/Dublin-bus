@@ -7,7 +7,7 @@ import SelectListType from './SelectListType';
 import SelectListRating from './SelectListRating';
 
 
-const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRating, childClicked, isLoading, selectedPlace, setSelectedPlace}) => {
+const Explore = ({ places, type, setType, rating, setRating, isLoading, selectedPlace, setSelectedPlace}) => {
   console.log("Places:",places)
   const [elRefs, setElRefs] = useState([]);
   
@@ -33,9 +33,6 @@ const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRat
           
 
           <div className="w-full items-center">
-            {/* <Typography variant='h5'>
-              Restaurants, Hotels & Attractions
-            </Typography> */}
 
             {isLoading ? (
               <div >
@@ -62,7 +59,6 @@ const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRat
                     {places?.slice((page - 1) * 1, ((page - 1) * 1) + 1).map((place, i) => (
                       <Grid ref={elRefs[i]} item key={i} xs={12}>
                         <PlaceDetails
-                          selected={Number(childClicked) === i}
                           refProp={elRefs[i]}
                           place={place}
                         />
@@ -80,7 +76,6 @@ const Explore = ({ onPlaceChanged, onLoad, places, type, setType, rating, setRat
                   
                     <Grid ref={elRefs[0]} item key={0} xs={12}>
                     <PlaceDetails
-                      selected={Number(childClicked) === 0}
                       refProp={elRefs[0]}
                       place={selectedPlace}
                     />

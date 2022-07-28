@@ -1,4 +1,4 @@
-import { Fragment, useState} from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   AnnotationIcon,
@@ -13,9 +13,6 @@ import {
 import { SearchIcon } from '@heroicons/react/solid'
 import MapAllStops from '../Components/MapAllStops'
 import { Link } from 'react-router-dom'
-import { useJsApiLoader } from '@react-google-maps/api';
-import HeaderLogo from '../Components/HeaderLogo'
-import PlannerContainer from '../Components/PlannerContainer'
 import Login from '../Components/Login'
 
 
@@ -42,11 +39,13 @@ function classNames(...classes) {
 
 export default function Planner() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  // const { isLoaded } = useJsApiLoader({  
-  //   libraries: ["places"],
-  //   googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
-  // })
+  const [coordinates, setCoorodinates] = useState({});
+  
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(( {coords: {latitude, longitude}}) => {
+        setCoorodinates({lat: latitude, lng: longitude});
+    })
+  },[]);
 
   return (
     <>
@@ -287,7 +286,7 @@ export default function Planner() {
             {/* Secondary column (hidden on smaller screens) */}
             <aside className="hidden w-full bg-white border-l dark:bg-black border-gray-200 overflow-y-auto lg:block">
               <div className="flex w-full items-stretch overflow-hidden">
-                <MapAllStops />
+                <MapAllStops coordinates={coordinates}/>
               </div>  
             </aside>
           </div>
