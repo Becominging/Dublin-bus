@@ -32,8 +32,8 @@ function StopsContainer() {
      {/* Secondary column (hidden on smaller screens) */}
      <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
        <div className="flex w-full items-stretch overflow-hidden">
-         <MapAllStops coordinates={coordinates} selectedStop={selectedStop} setSelectedStop={setSelectedStop}/>
-         {/* {selectedStop&&<MapStop selectedStop={selectedStop}/>} */}
+         {!selectedStop&&<MapAllStops coordinates={coordinates} selectedStop={selectedStop} setSelectedStop={setSelectedStop}/>}
+         {selectedStop&&<MapStop selectedStop={selectedStop}/>}
        </div>  
      </aside>
      

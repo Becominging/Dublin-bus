@@ -20,7 +20,7 @@ const MapAllStops= ({ coordinates, selectedStop, setSelectedStop }) => {
     googleMapsApiKey: "AIzaSyAPFUKh9yhgAoe5r0bcJ2CXyLZM2MBKMVU"
   })
   console.log("All Stops:",stopsData)
-
+  
   const {
     coords,
     } = useGeolocated({
@@ -34,7 +34,8 @@ const MapAllStops= ({ coordinates, selectedStop, setSelectedStop }) => {
   // State to Mouseover a stop
   const [hoverStop, setHoverStop] = useState("")
 
-  return isLoaded ? (  
+  return isLoaded ? ( 
+    
     <GoogleMap
         mapContainerStyle={containerStyle}
         center={ coordinates }
@@ -119,6 +120,9 @@ const MapAllStops= ({ coordinates, selectedStop, setSelectedStop }) => {
         }
           
       </GoogleMap>
+
+
+
   ) : <></>
 }
 
