@@ -5,19 +5,26 @@ import moment from "moment"
 
 
 const Results = ({ selectedLine, origin, destination, selectedTime }) => {
+  const time=moment(selectedTime).hour()*60*60+moment(selectedTime).minute()*60+moment(selectedTime).second()
+
   const { data: results, loading, error } = useFetch("http://127.0.0.1:8000/prediction/" 
     + selectedLine.route__route_short_name + '/'
     + selectedLine.direction_id + '/'
     + origin.stop_number + '/'
     + origin.stop_sequence + '/'
-    + moment(selectedTime).hour()*60*60+moment(selectedTime).minute()*60+moment(selectedTime).second() + '/'
+    + time + '/'
     + moment(selectedTime).day() + '/'
     + moment(selectedTime).month() + '/'
     + destination.stop_number + '/'
-    + destination.stop_sequence + '/')
+    + destination.stop_sequence + '/'
+    + origin.stop_id + '/')
     
-    console.log('Prediction Provider Data:', results)
-  
+  console.log('Prediction Provider Data:', results)
+  // console.log(moment(selectedTime).hour())
+  // console.log(moment(selectedTime).minute())
+  // console.log(moment(selectedTime).second())
+  // console.log(moment(selectedTime).hour()*60*60+moment(selectedTime).minute()*60+moment(selectedTime).second())
+
   return (
     <>
     { loading && <div>{loading}</div> }
@@ -33,6 +40,8 @@ const Results = ({ selectedLine, origin, destination, selectedTime }) => {
               </div>
 
               <div className="ml-3 w-0 flex-1 pt-0.5">
+                <p className="text-sm font-medium text-gray-900">Bus departure time:</p>
+                <p className="mt-1 text-sm text-gray-500">{results['DepartureTime']}</p>
                 <p className="text-sm font-medium text-gray-900">Journey Duration:</p>
                 <p className="mt-1 text-sm text-gray-500">About {results && Math.round(results['JourneyDuration']/60)} mins</p>
               </div>
