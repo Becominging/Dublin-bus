@@ -7,7 +7,7 @@ urlpatterns = [path('stop_info/<str:stop_id>/', views.StopInfo, name='stop_info'
                path('shape_of_trip/<str:trip_id>/', views.ShapeOfTrip, name='shape_of_trip'),
                path('trips_in_route/<str:route_id>/', views.TripsInRoute, name='trips_in_route'),
                path('lines/', views.Lines, name='lines'),
-               path('prediction/<route>/<direction>/<stopA>/<stopA_sequence>/<time>/<day>/<month>/<stopB>/<stopB_sequence>/', views.Predict, name='prediction')]
+               path('prediction/<route>/<direction>/<stopA>/<stopA_sequence>/<time>/<day>/<month>/<stopB>/<stopB_sequence>/<stopA_id>/', views.Predict, name='prediction')]
 
 router = DefaultRouter()  # 创建路由器
 router.register(r'stops', views.StopViewSet)  # 注册路由指定路由前缀和指定视图集

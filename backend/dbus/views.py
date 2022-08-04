@@ -6,7 +6,9 @@ from rest_framework.viewsets import ModelViewSet
 from dbus.models import Stop, Shape, Trip, StopTime, Route, Calendar
 from dbus.serializers import StopModelSerializer
 import requests
-from joblib import load
+import gzip
+import pickle
+from datetime import datetime
 
 
 class StopViewSet(ModelViewSet):
@@ -186,49 +188,62 @@ def Lines(request):
     return JsonResponse(list(result), safe=False)
 
 
-def Predict(request, route, direction, stopA, stopA_sequence, time, day, month, stopB, stopB_sequence):
+def Predict(request, route, direction, stopA, stopA_sequence, time, day, month, stopB, stopB_sequence, stopA_id):
 
-    # make sure parameters are of right type
-    route = str(route.upper())
-    direction = int(direction)
-    stopA = str(stopA)
-    stopA_sequence = int(stopA_sequence)
-    time = int(time)
-    day = int(day)
-    month = int(month)
-    stopB = str(stopB)
-    stopB_sequence = int(stopB_sequence)
+    stop_time_details = StopTime.objects.filter(stop_id=stopA_id,)
+    filter_time = []
+    for stop_time in stop_time_details:
+        # filter departure_time that is greater than the user-selected time
+        if (stop_time.departure_time.hour * 60 + stop_time.departure_time.minute) * 60 + stop_time.departure_time.second > int(time):
+            filter_time.append(stop_time.departure_time)
 
-    # call pickle file (pickle files were named wrong the file is called d1 for direction 0, and d2 for direction 1)
-    pickleFile = 'Pickles/' + route + '_d' + str(direction + 1) + '_model.pkl'
+    if filter_time:
+        # If there is still a bus departing from this stop on the day
+        min_filter_time = min(filter_time).hour * 60 * 60 + min(filter_time).minute * 60 + min(filter_time).second
+        departure_time = min(filter_time)
 
-    # load the pickle file
-    pk = load(pickleFile)
+        # make sure parameters are of right type
+        route = str(route.upper())
+        direction = int(direction)
+        stopA = str(stopA)
+        stopA_sequence = int(stopA_sequence)
+        time = int(min_filter_time)
+        day = int(day)
+        month = int(month)
+        stopB = str(stopB)
+        stopB_sequence = int(stopB_sequence)
 
-    # allocate values to dummy features based on user input
-    days = [0, 0, 0, 0, 0, 0]
-    months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    days[day - 1] = 0 if (day == 0) else 1
-    months[month - 1] = 0 if (month == 0) else 1
-    print(days)
-    print(months)
+        # call pickle file (pickle files were named wrong the file is called d1 for direction 0, and d2 for direction 1)
+        pickleStopA = 'Pickles/' + route + '_d' + str(direction + 1) + '_model.pkl'
 
-    # add parameters with dummy values to get full list of parameters
-    paramsA = [stopA_sequence, stopA, time] + days + months
-    paramsB = [stopB_sequence, stopB, time] + days + months
-    print(paramsA)
-    print(paramsB)
+        # load the pickle file
+        with gzip.open(pickleStopA, 'rb') as f:
+            pFile = pickle.Unpickler(f)
+            pickleStop = pFile.load()
 
-    # make a prediction and convert to a list
-    predictA = pk.predict([paramsA])
-    predict_listA = predictA.tolist()
-    predictB = pk.predict([paramsB])
-    predict_listB = predictB.tolist()
-    prediction = predict_listB[0] - predict_listA[0]
-    print(prediction)
+        # allocate values to dummy features based on user input
+        days = [0, 0, 0, 0, 0, 0]
+        months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        days[day - 1] = 0 if (day == 0) else 1
+        months[month - 1] = 0 if (month == 0) else 1
+
+        # add parameters with dummy values to get full list of parameters
+        paramsA = [stopA_sequence, stopA, time] + days + months
+        paramsB = [stopB_sequence, stopB, time] + days + months
+
+        # make a prediction and convert to a list
+        A_predict = pickleStop.predict([paramsA])
+        B_predict = pickleStop.predict([paramsB])
+        prediction = B_predict[0] - A_predict[0]
+        print(prediction)
+    else:
+        # If there is no bus departing from this station that day
+        departure_time = "No available bus today"
+        prediction = 0
 
     response = {
-        'JourneyDuration': prediction
+        'JourneyDuration': prediction,
+        'DepartureTime': departure_time
     }
 
     print(response)
