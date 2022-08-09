@@ -1,4 +1,4 @@
-import { Fragment, useState} from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   AnnotationIcon,
@@ -6,25 +6,26 @@ import {
   SwitchVerticalIcon,
   MenuAlt2Icon,
   CloudIcon,
-  UserIcon,
+  // UserIcon,
   MapIcon,
   XIcon,
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
+import MapAllStops from '../Components/MapAllStops'
 import { Link } from 'react-router-dom'
 import HeaderLogo from '../Components/HeaderLogo'
-import StopsContainer from '../Components/StopsContainer'
+import News from '../Components/News';
 
 
 
 
 const sidebarNavigation = [
   { name: 'Planner', href: '#', path:'/',  icon: MapIcon, current: false },
-  { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: true },
+  { name: 'Stops', href: '#', path:'/stops', icon: SearchIcon, current: false },
   { name: 'Lines', href: '#',  path:'/lines', icon: SwitchVerticalIcon, current: false },
   { name: 'Explore', href: '#',  path:'/explore', icon: LocationMarkerIcon, current: false },
-  { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current: false },
-  { name: 'News', href: '#', path:'/search', icon: SearchIcon, current:false},
+  { name: 'Weather', href: '#', path:'/weather', icon: CloudIcon, current:false },
+  { name: 'News', href: '#', path:'/search', icon: SearchIcon, current:true   },
   // { name: 'Account', href: '#', path:'/account', icon: UserIcon, current: false },
   // { name: 'Donate', href: '#',  path:'/donate', icon: BellIcon, current: false },
   { name: 'Feedback', href: '#',  path:'/feedback', icon: AnnotationIcon, current: false },
@@ -39,8 +40,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Planner() {
+export default function Newspage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [coordinates, setCoorodinates] = useState({});
+  
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(( {coords: {latitude, longitude}}) => {
+        setCoorodinates({lat: latitude, lng: longitude});
+    })
+  },[]);
 
   return (
     <>
@@ -194,6 +202,7 @@ export default function Planner() {
         <div className="flex-1 flex flex-col overflow-hidden">
           <header className="w-full">
             <div className="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
+              
               <button
                 type="button"
                 className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-600 md:hidden"
@@ -202,13 +211,13 @@ export default function Planner() {
                 <span className="sr-only">Open sidebar</span>
                 <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
               </button>
-
+              
               <div className="flex-1 flex justify-between px-4 sm:px-6">
                
                <div className="flex-1 flex">
                 <HeaderLogo />
                </div>
-
+                
                 <div className="ml-2 flex items-center space-x-4 sm:ml-6 sm:space-x-6">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative flex-shrink-0">
@@ -257,7 +266,22 @@ export default function Planner() {
 
           {/* Main content */}
           <div className="flex items-stretch overflow-hidden">
-            <StopsContainer />
+            
+            {/* Primary column */}           
+            <main className="overflow-y-auto w-96">
+              <section aria-labelledby="primary-heading" className="min-w-0 flex-1 h-full flex flex-col lg:order-last">
+              <News />                              
+              
+              </section>
+            </main>
+
+            {/* Secondary column (hidden on smaller screens) */}
+            <aside className="hidden w-full bg-white border-l border-gray-200 overflow-y-auto lg:block">
+              <div className="flex w-full items-stretch overflow-hidden">
+                <MapAllStops coordinates={coordinates}/>
+              </div>  
+            </aside>
+
           </div>
         
         </div>

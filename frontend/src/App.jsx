@@ -6,6 +6,7 @@ import Weather from './pages/Weather';
 import Account from "./pages/Account";
 import Feedback from "./pages/Feedback";
 import Explore from "./pages/Explore";
+import Newspage from "./pages/Newspage";
 
 
 
@@ -21,10 +22,10 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/search" element={<Newspage />} />
         
       </Routes>
     </BrowserRouter>
-
   
   );
 }
