@@ -10,7 +10,7 @@ export const Navbar = ({ setDarkTheme, darkTheme }) => (
           Twitter🔎 
         </p>
       </a>
-      <button type="button" onClick={() => setDarkTheme(!darkTheme)} className="text-2xl dark:bg-gray-50 dark:text-gray-900 bg-white border rounded-full px-2 py-1 hover:shadow-lg">{darkTheme ? '💡 Light' : '🌙 Dark'}</button>
+      <button type="button" onClick={() => setDarkTheme(!darkTheme)} className="text-2xl dark:bg-gray-50 dark:text-gray-900 bg-white rounded-full px-2 py-1 hover:shadow-lg">{darkTheme ? '💡 Light' : '🌙 Dark'}</button>
     </div>
     <Search />
   </div>
