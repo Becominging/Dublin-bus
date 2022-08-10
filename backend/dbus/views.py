@@ -205,12 +205,12 @@ def Predict(request, route, direction, stopA, stopA_sequence, time, day, month, 
         # make sure parameters are of right type
         route = str(route.upper())
         direction = int(direction)
-        stopA = str(stopA)
+        stopA = int(stopA)
         stopA_sequence = int(stopA_sequence)
         time = int(min_filter_time)
         day = int(day)
         month = int(month)
-        stopB = str(stopB)
+        stopB = int(stopB)
         stopB_sequence = int(stopB_sequence)
 
         # call pickle file (pickle files were named wrong the file is called d1 for direction 0, and d2 for direction 1)
