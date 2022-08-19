@@ -17,13 +17,13 @@ The journey planner feature provides dynamic travel time estimates for the next 
 
 The stops search feature aims to provide real-time information about buses that will arrive at a selected stop within the next hour, including line names, arrival times, and delays. In addition to selecting stops through the combo box, users can also select stops by clicking the stop icon on the map.
 
-![Stops Search](frontend/src/data/Stops_Search.gif)
+![Stops Search](frontend/src/data/Stop_Search.gif)
 
 ### Lines Search
 
 The lines search feature aims to provide stop names and stop sequences in a selected bus line. And also the selected line and the stops in it will be displayed on the map
 
-![Lines Search](frontend/src/data/Lines_Search.gif)
+![Lines Search](frontend/src/data/Line_Search.gif)
 
 ### Explore Nearby
 
