@@ -11,7 +11,7 @@ Visit our Dublin Bus app [here](http://ec2-34-245-45-115.eu-west-1.compute.amazo
 
 The journey planner feature provides dynamic travel time estimates for the next seven days. 
 
-![Journey Planner](Dublin-bus/frontend/src/data/Journey_Planner.gif)
+![Journey Planner](frontend/src/data/Journey_Planner.gif)
 
 ### Stops Search
 
