@@ -41,7 +41,7 @@ The weather forecast feature can provide weather information for today and the n
 
 The feedback feature allows users to give the operator  feedback on their experience of using this app and their suggestions for its improvement. After the user fills in the form and clicks submit, the authors will receive the corresponding feedback email as an alert and all the feedback is available on getform.io website.
 
-![Feedback](frontend/src/data/Feedback.png)
+![Feedback](frontend/src/data/Feedback.jpg)
 
 ### News about Dublin Bus
 
