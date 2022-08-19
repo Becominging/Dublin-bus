@@ -35,7 +35,7 @@ The explore nearby feature can provide information about restaurants, hotels, an
 
 The weather forecast feature can provide weather information for today and the next four days 
 
-![Weather Forecast]((frontend/src/data/Weather_Forecast.jpg)
+![Weather Forecast](frontend/src/data/Weather_Forecast.jpg)
 
 ### Feedback
 
